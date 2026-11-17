@@ -1,0 +1,72 @@
+<svg viewBox="0 0 600 720" width="1200" height="1440" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo general crema suave estilo estudio -->
+  <rect width="600" height="720" rx="48" fill="#F4F3EF" />
+
+  <!-- COMPOSICIÓN GEOMÉTRICA DE BLOQUES (NARANJA / NEGRO / BLANCO) -->
+  <g transform="translate(80, 55)">
+    <!-- Cuadrante Superior Izquierdo: Naranja Terracota -->
+    <rect x="0" y="0" width="210" height="210" fill="#D97338" />
+    <!-- Cuadrante Superior Derecho: Blanco & Bloque Negro -->
+    <rect x="210" y="0" width="230" height="210" fill="#FFFFFF" />
+    <rect x="250" y="15" width="190" height="185" fill="#18181B" />
+
+    <!-- Cuadrante Inferior Izquierdo: Negro & Bloque Blanco -->
+    <rect x="0" y="210" width="210" height="230" fill="#18181B" />
+    <!-- Cuadrante Inferior Derecho: Blanco & Esquina Naranja -->
+    <rect x="210" y="210" width="230" height="230" fill="#FFFFFF" />
+    <rect x="325" y="245" width="115" height="195" fill="#D97338" />
+
+    <!-- CAJA DE SNEAKERS ABIERTA EN PERSPECTIVA -->
+    <!-- Tapa Abierta (Izquierda Superior) -->
+    <polygon points="-15,105 15,82 225,52 105,235" fill="#1C1917" stroke="#18181B" stroke-width="8" stroke-linejoin="round" />
+    <polygon points="8,104 210,72 105,222 18,125" fill="#D97338" stroke="#18181B" stroke-width="6" stroke-linejoin="round" />
+
+    <!-- Interior Oscuro de la Caja -->
+    <polygon points="68,238 220,175 418,225 215,310" fill="#18181B" />
+
+    <!-- Cara Frontal Izquierda de la Caja (Naranja con Etiqueta Blanca) -->
+    <polygon points="68,238 215,310 215,435 68,358" fill="#D97338" stroke="#18181B" stroke-width="8" stroke-linejoin="round" />
+    <!-- Etiqueta de Talla Lateral en la Caja -->
+    <polygon points="76,315 138,348 138,392 76,358" fill="#18181B" stroke="#FFFFFF" stroke-width="6" stroke-linejoin="round" />
+
+    <!-- Cara Lateral Derecha de la Caja (Negro Mate) -->
+    <polygon points="215,310 418,225 418,348 215,435" fill="#18181B" stroke="#18181B" stroke-width="8" stroke-linejoin="round" />
+
+    <!-- SILUETA HIGH-END SNEAKER EMERGIENDO DE LA CAJA -->
+    <g transform="translate(15, -12)">
+      <!-- Cuerpo Principal del Sneaker (Blanco con Contorno Grueso Negro) -->
+      <path d="M 145 258 L 228 115 C 242 96 264 102 270 122 L 288 148 C 308 146 322 118 332 82 C 342 62 365 65 372 88 L 385 132 C 402 145 432 182 440 205 C 446 225 432 246 408 256 L 208 320 C 175 305 152 282 145 258 Z"
+            fill="#FFFFFF" stroke="#18181B" stroke-width="10" stroke-linejoin="round" />
+
+      <!-- Panel Trasero y Suela Oscura High-Contrast -->
+      <path d="M 212 315 L 332 205 C 355 188 388 188 435 212 C 442 230 426 248 402 258 L 212 315 Z"
+            fill="#18181B" />
+
+      <!-- Detalle Naranja en el Cuello / Tobillo -->
+      <path d="M 358 95 L 385 135 L 368 152 L 346 115 Z" fill="#D97338" stroke="#18181B" stroke-width="6" />
+
+      <!-- Jaula Triangular Lateral (Estilo Jordan 4 / High-End Streetwear) -->
+      <polygon points="235,205 292,162 298,225" fill="#FFFFFF" stroke="#18181B" stroke-width="8" stroke-linejoin="round" />
+      <polygon points="248,202 284,175 288,214" fill="#18181B" />
+
+      <!-- Ojales y Agujetas -->
+      <line x1="182" y1="210" x2="212" y2="225" stroke="#18181B" stroke-width="9" stroke-linecap="round" />
+      <line x1="202" y1="180" x2="232" y2="195" stroke="#18181B" stroke-width="9" stroke-linecap="round" />
+      <line x1="222" y1="150" x2="252" y2="165" stroke="#18181B" stroke-width="9" stroke-linecap="round" />
+
+      <!-- Cápsula de Aire Blanca en la Entresuela -->
+      <rect x="325" y="242" width="58" height="16" rx="8" transform="rotate(-19 325 242)" fill="#FFFFFF" />
+    </g>
+  </g>
+
+  <!-- TIPOGRAFÍA OFICIAL SNEAKER HYPE HMO -->
+  <text x="300" y="565" text-anchor="middle" fill="#111111" font-family="'Inter', 'Montserrat', 'Helvetica Neue', Arial, sans-serif" font-weight="900" font-size="64" letter-spacing="5">
+    SNEAKER
+  </text>
+  <text x="300" y="628" text-anchor="middle" fill="#111111" font-family="'Inter', 'Montserrat', 'Helvetica Neue', Arial, sans-serif" font-weight="900" font-size="64" letter-spacing="6">
+    HYPE
+  </text>
+  <text x="300" y="690" text-anchor="middle" fill="#D97338" font-family="'Inter', 'Montserrat', 'Helvetica Neue', Arial, sans-serif" font-weight="900" font-size="58" letter-spacing="8">
+    HMO
+  </text>
+</svg>

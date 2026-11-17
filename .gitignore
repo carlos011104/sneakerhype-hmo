@@ -1,0 +1,7 @@
+# Archivos de sistema macOS
+.DS_Store
+**/.DS_Store
+
+# Credenciales / códigos de recuperación locales (NUNCA subir a GitHub)
+Authenticator Password/
+*.txt
