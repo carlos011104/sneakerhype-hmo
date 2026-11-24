@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SneakerHype HMO | Exclusive Sneaker Drops & Pre-Orders Sonora</title>
-  <meta name="description" content="Plataforma oficial de drops exclusivos de sneakers en Sonora. Asegura tus siluetas favoritas bajo pedido con apartado previo y liquida el restante contra entrega física en Hermosillo y municipios aliados." />
+  <meta name="description" content="Plataforma oficial de drops exclusivos de sneakers en Sonora. Drop #01 Golden Goose y Drop #02 Nike Air Max 90 activos en paralelo. Asegura tu par bajo pedido y liquida al recibir en mano." />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="SneakerHype HMO | Drops Exclusivos de Sneakers en Sonora" />
-  <meta property="og:description" content="Asegura tus siluetas favoritas bajo pedido (Golden Goose, Air Max 90 y más). Aparta tu slot de importación y liquida el resto en mano al recibir en Sonora." />
-  <meta property="og:image" content="/drop1/PHOTO-2026-11-09-06-38-50.jpg" />
+  <meta property="og:description" content="Drop #01 Golden Goose ($1,500 apartado) y Drop #02 Nike Air Max 90 ($1,200 apartado) activos en paralelo. Liquida el resto en mano al recibir en Sonora." />
+  <meta property="og:image" content="/drop2/39AD6C0D-E457-4FDD-A858-400361A8F625_1_105_c.jpeg" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/svg+xml" href="./logo_oficial_sneakerhype_hmo_opci_n_5.svg" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -27,22 +27,70 @@
       const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
       return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
     };
-    const PRICING_RULES = {
-      depositPrice: 1500,
-      remainingPrice: 1200,
-      totalPublicPrice: 2700,
-      wholesalePrice: 1900
+
+    const DROP_CONFIGS = {
+      drop1: {
+        id: "drop1",
+        number: "01",
+        folder: "drop1",
+        name: "Golden Goose",
+        fullName: "Drop #01 • Golden Goose (Full Set)",
+        badgeText: "DROP #01 ACTIVO • Golden Goose (Full Set)",
+        specLabel: "Full Set",
+        packagingSummary: "Caja + Cubrepolvo + Bag",
+        depositPrice: 1500,
+        remainingPrice: 1200,
+        totalPublicPrice: 2700,
+        wholesalePrice: 1900,
+        ownerCost: 1100,
+        ownerPartnerProfit: 800,
+        ownerDirectProfit: 1600,
+        partnerRemainingTransfer: 400,
+        partnerSliderMin: 2300,
+        partnerSliderMax: 3500,
+        filters: [
+          { id: "all", label: "Todos" },
+          { id: "superstar", label: "Super-Star" },
+          { id: "ballstar", label: "Ball Star" }
+        ]
+      },
+      drop2: {
+        id: "drop2",
+        number: "02",
+        folder: "drop2",
+        name: "Nike Air Max 90",
+        fullName: "Drop #02 • Nike Air Max 90 Edition",
+        badgeText: "DROP #02 NUEVO • Nike Air Max 90 Edition",
+        specLabel: "Caja Original",
+        packagingSummary: "Caja Clásica Naranja Nike",
+        depositPrice: 1200,
+        remainingPrice: 700,
+        totalPublicPrice: 1900,
+        wholesalePrice: 1200,
+        ownerCost: 700,
+        ownerPartnerProfit: 500,
+        ownerDirectProfit: 1200,
+        partnerRemainingTransfer: 0,
+        partnerSliderMin: 1500,
+        partnerSliderMax: 2600,
+        filters: [
+          { id: "all", label: "Todos" },
+          { id: "clasicos", label: "Clásicos & Urbanos" },
+          { id: "ediciones", label: "Ediciones Especiales" }
+        ]
+      }
     };
+
     const formatMXN = (n) => new Intl.NumberFormat("es-MX", { style: "currency", currency: "MXN", maximumFractionDigits: 0 }).format(n);
 
     const FAQS = [
       {
         q: "¿Cómo funciona el modelo de Drops bajo pedido?",
-        a: "Lanzamos periódicamente drops de las siluetas más cotizadas del streetwear internacional (Golden Goose, Nike Air Max 90, etc.) en batches o cupos limitados. Cada par se importa sobre pedido: apartas con un monto base para asegurar tu slot de importación y liquidas el resto en mano únicamente cuando recibes tu par en Sonora."
+        a: "Manejamos drops activos en paralelo de las siluetas más cotizadas del streetwear internacional (Drop #01 Golden Goose y Drop #02 Nike Air Max 90) en cupos limitados de 5 pares por modelo. Apartas con el monto inicial del drop ($1,200 en Air Max 90 o $1,500 en Golden Goose) para asegurar tu slot y liquidas el resto ($700 en Air Max 90 o $1,200 en Golden Goose) únicamente cuando recibes tu par en mano en Sonora."
       },
       {
-        q: "¿Qué incluye el Full Set?",
-        a: "Cada par se entrega con su caja, cubrepolvo de tela (dust bag) y shopping bag. Antes de apartar te compartimos fotos y video del par para que veas exactamente lo que recibes."
+        q: "¿Qué incluye cada par en el Drop #01 y Drop #02?",
+        a: "En el Drop #01 (Golden Goose) cada par incluye su Full Set con caja, cubrepolvo de tela (dust bag) y shopping bag. En el Drop #02 (Nike Air Max 90) cada par se entrega nuevo en su caja clásica naranja Nike con amortiguación Air visible."
       },
       {
         q: "¿Cuánto tiempo tarda en llegar mi pedido a Sonora?",
@@ -54,295 +102,502 @@
       },
       {
         q: "¿Qué pasa si tengo dudas con mi talla antes de ordenar?",
-        a: "Manejamos tallas estándar en centímetros fiel a la horma oficial de cada modelo. Al enviar tu apartado por WhatsApp, nuestro asesor te ayuda a confirmar tu medida exacta según los tenis que usas habitualmente."
+        a: "Manejamos tallas de 24 a 29 cm fieles a la horma oficial de cada silueta. Al enviar tu apartado por WhatsApp, nuestro asesor te ayuda a confirmar tu medida exacta según los tenis que usas habitualmente."
       },
       {
         q: "¿Realizan entregas en otros municipios de Sonora?",
-        a: "Contamos con presencia física y socios directos en Hermosillo (Carlos y Julio), Caborca (José), San Luis Río Colorado (Omar), Cananea (Germán) y Huachinera (Brayan). Si estás en otra localidad de Sonora, coordinamos el envío seguro directo hasta tu puerta."
+        a: "Contamos con presencia física y socios directos en Hermosillo, Caborca, San Luis Río Colorado, Cananea y Huachinera. Si estás en otra localidad de Sonora, coordinamos el envío seguro directo hasta tu puerta."
       }
     ];
-    const DROPS = [
-  {
-    "id": "gg-01",
-    "code": "SH-GG-01",
-    "name": "Golden Goose Super-Star \"Grey Star & White Luce Heel\"",
-    "brand": "Golden Goose Deluxe Brand",
-    "qualitySpec": "Full Set",
-    "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
-    "colorway": "Piel Blanca / Estrella Gamuza Gris / Talón Blanco Nacarado",
-    "photoRef": "PHOTO-2026-11-09-06-38-50.jpg",
-    "videoRef": "VIDEO-2026-11-09-06-39-00.mp4",
-    "cloudImageUrl": "/drop1/PHOTO-2026-11-09-06-38-50.jpg",
-    "cloudVideoUrl": "/drop1/VIDEO-2026-11-09-06-39-00.mp4",
-    "timestampKey": "06-38-50",
-    "tag": "Drop #01 • Top Seller",
-    "slotsTotal": 5,
-    "slotsTaken": 0,
-    "description": "Silueta clásica Super-Star en piel blanca suave con estrella y puntera en gamuza gris ceniza, talón blanco con brillo sutil y suela con acabado artesanal."
-  },
-  {
-    "id": "gg-02",
-    "code": "SH-GG-02",
-    "name": "Golden Goose Ball Star \"Tan Suede / Desert Camel\"",
-    "brand": "Golden Goose Deluxe Brand",
-    "qualitySpec": "Full Set",
-    "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
-    "colorway": "Gamuza Camel Desierto / Piel Blanca / Estrella Tono Arena",
-    "photoRef": "PHOTO-2026-11-09-06-39-01.jpg",
-    "videoRef": "VIDEO-2026-11-09-06-39-23.mp4",
-    "cloudImageUrl": "/drop1/PHOTO-2026-11-09-06-39-01.jpg",
-    "cloudVideoUrl": "/drop1/VIDEO-2026-11-09-06-39-23.mp4",
-    "timestampKey": "06-39-01",
-    "tag": "Drop #02 • Favorito HMO",
-    "slotsTotal": 5,
-    "slotsTaken": 0,
-    "description": "Edición retro-basket Ball Star con paneles en gamuza camel/tabaco y piel blanca, perforaciones frontales y letras \"SNEA-KERS\" en el talón."
-  },
-  {
-    "id": "gg-03",
-    "code": "SH-GG-03",
-    "name": "Golden Goose Ball Star \"Forest Green / Journey of Love\"",
-    "brand": "Golden Goose Deluxe Brand",
-    "qualitySpec": "Full Set",
-    "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
-    "colorway": "Piel Blanca / Estrella & Talón Verde Bosque / \"Journey of Love\"",
-    "photoRef": "PHOTO-2026-11-09-06-39-26.jpg",
-    "videoRef": "VIDEO-2026-11-09-06-39-42.mp4",
-    "cloudImageUrl": "/drop1/PHOTO-2026-11-09-06-39-26.jpg",
-    "cloudVideoUrl": "/drop1/VIDEO-2026-11-09-06-39-42.mp4",
-    "timestampKey": "06-39-26",
-    "tag": "Drop #03 • Edición Especial",
-    "slotsTotal": 5,
-    "slotsTaken": 0,
-    "description": "Edición especial Ball Star con caligrafía artística \"Journey of Love\" en la entresuela, estrella y talón en verde bosque intenso y puntera en gamuza gris."
-  },
-  {
-    "id": "gg-04",
-    "code": "SH-GG-04",
-    "name": "Golden Goose Ball Star \"Sherpa & Grey Star / Dreamed in Venice\"",
-    "brand": "Golden Goose Deluxe Brand",
-    "qualitySpec": "Full Set",
-    "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
-    "colorway": "Cuello Borrega Crema / Estrella Gris / Inscripción \"Dreamed in Venice\"",
-    "photoRef": "PHOTO-2026-11-09-06-39-45.jpg",
-    "videoRef": "VIDEO-2026-11-09-06-40-05.mp4",
-    "cloudImageUrl": "/drop1/PHOTO-2026-11-09-06-39-45.jpg",
-    "cloudVideoUrl": "/drop1/VIDEO-2026-11-09-06-40-05.mp4",
-    "timestampKey": "06-39-45",
-    "tag": "Drop #04 • Detalle Artesanal",
-    "slotsTotal": 5,
-    "slotsTaken": 0,
-    "description": "Silueta Ball Star con forro interior tipo borrega sherpa en el cuello, estrella en gamuza gris y leyenda \"DREAMED IN VENICE\" en la suela."
-  },
-  {
-    "id": "gg-05",
-    "code": "SH-GG-05",
-    "name": "Golden Goose Ball Star \"Navy Star / Gold Heel & Red Accent\"",
-    "brand": "Golden Goose Deluxe Brand",
-    "qualitySpec": "Full Set",
-    "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
-    "colorway": "Estrella Gamuza Azul Marino / Talón Dorado / Acento Rojo",
-    "photoRef": "PHOTO-2026-11-09-06-40-07.jpg",
-    "videoRef": "VIDEO-2026-11-09-06-40-25.mp4",
-    "cloudImageUrl": "/drop1/PHOTO-2026-11-09-06-40-07.jpg",
-    "cloudVideoUrl": "/drop1/VIDEO-2026-11-09-06-40-25.mp4",
-    "timestampKey": "06-40-07",
-    "tag": "Drop #05 • Edición Limitada",
-    "slotsTotal": 5,
-    "slotsTaken": 0,
-    "description": "Combinación de alto contraste con estrella en gamuza azul marino, talón metálico dorado con acento inferior en rojo carmesí y silueta Ball Star."
-  },
-  {
-    "id": "gg-06",
-    "code": "SH-GG-06",
-    "name": "Golden Goose Super-Star \"Black Heel & Classic Star\"",
-    "brand": "Golden Goose Deluxe Brand",
-    "qualitySpec": "Full Set",
-    "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
-    "colorway": "Piel Blanca / Talón Negro Contraste / Estrella Gamuza Gris",
-    "photoRef": "PHOTO-2026-11-09-06-40-27.jpg",
-    "videoRef": "VIDEO-2026-11-09-06-41-33.mp4",
-    "cloudImageUrl": "/drop1/PHOTO-2026-11-09-06-40-27.jpg",
-    "cloudVideoUrl": "/drop1/VIDEO-2026-11-09-06-41-33.mp4",
-    "timestampKey": "06-40-27",
-    "tag": "Drop #06 • Clásico Urbano",
-    "slotsTotal": 5,
-    "slotsTaken": 0,
-    "description": "Uno de los colorways más versátiles de Golden Goose con talón negro en piel, estrella en gamuza gris y acabado vintage artesanal."
-  },
-  {
-    "id": "gg-07",
-    "code": "SH-GG-07",
-    "name": "Golden Goose Super-Star \"Silver Star / Blue Heel & VSA Is For Lovers\"",
-    "brand": "Golden Goose Deluxe Brand",
-    "qualitySpec": "Full Set",
-    "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
-    "colorway": "Piel Crema / Estrella Plateada / Talón Azul Rey / Agujetas Logo Negras",
-    "photoRef": "PHOTO-2026-11-09-06-41-36.jpg",
-    "videoRef": "VIDEO-2026-11-09-06-41-51.mp4",
-    "cloudImageUrl": "/drop1/PHOTO-2026-11-09-06-41-36.jpg",
-    "cloudVideoUrl": "/drop1/VIDEO-2026-11-09-06-41-51.mp4",
-    "timestampKey": "06-41-36",
-    "tag": "Drop #07 • Selección Especial",
-    "slotsTotal": 5,
-    "slotsTaken": 0,
-    "description": "Silueta Super-Star en piel crema con estrella plateada metálica, talón azul rey, agujetas negras con tipografía Golden Goose e inscripción \"VSA IS FOR LOVERS\" en la suela."
-  },
-  {
-    "id": "gg-08",
-    "code": "SH-GG-08",
-    "name": "Golden Goose Ball Star \"Cracked Leather / Black Star & Gum Sole\"",
-    "brand": "Golden Goose Deluxe Brand",
-    "qualitySpec": "Full Set",
-    "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
-    "colorway": "Piel Blanca / Puntera Craquelada / Estrella Negra / Suela Vintage Ámbar",
-    "photoRef": "PHOTO-2026-11-09-06-41-54.jpg",
-    "videoRef": "VIDEO-2026-11-09-06-42-02.mp4",
-    "cloudImageUrl": "/drop1/PHOTO-2026-11-09-06-41-54.jpg",
-    "cloudVideoUrl": "/drop1/VIDEO-2026-11-09-06-42-02.mp4",
-    "timestampKey": "06-41-54",
-    "tag": "Drop #08 • Edición Limitada",
-    "slotsTotal": 5,
-    "slotsTaken": 0,
-    "description": "Edición Ball Star en piel blanca granulada con puntera y talón en acabado craquelado, estrella y talón en negro contraste, agujetas crema y suela tono ámbar vintage."
-  },
-  {
-    "id": "gg-09",
-    "code": "SH-GG-09",
-    "name": "Golden Goose Super-Star \"Black Glitter Heel & Metallic Star\"",
-    "brand": "Golden Goose Deluxe Brand",
-    "qualitySpec": "Full Set",
-    "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
-    "colorway": "Piel Blanco Hueso / Estrella Metálica / Talón Glitter Negro / Agujetas Grises",
-    "photoRef": "PHOTO-2026-11-09-06-42-08.jpg",
-    "videoRef": "VIDEO-2026-11-09-06-42-24.mp4",
-    "cloudImageUrl": "/drop1/PHOTO-2026-11-09-06-42-08.jpg",
-    "cloudVideoUrl": "/drop1/VIDEO-2026-11-09-06-42-24.mp4",
-    "timestampKey": "06-42-08",
-    "tag": "Drop #09 • Nuevo Ingreso",
-    "slotsTotal": 5,
-    "slotsTaken": 0,
-    "description": "Silueta Super-Star en piel blanco hueso con estrella en acabado metálico champán, talón con glitter negro brillante, agujetas grises y suela con desgaste artesanal."
-  },
-  {
-    "id": "gg-10",
-    "code": "SH-GG-10",
-    "name": "Golden Goose Ball Star \"Grey Suede Toe / Black Star & Cream Laces\"",
-    "brand": "Golden Goose Deluxe Brand",
-    "qualitySpec": "Full Set",
-    "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
-    "colorway": "Piel Blanca Lisa / Puntera Gamuza Gris / Estrella Negra / Suela Vintage",
-    "photoRef": "PHOTO-2026-11-09-06-42-30.jpg",
-    "videoRef": "VIDEO-2026-11-09-06-42-45.mp4",
-    "cloudImageUrl": "/drop1/PHOTO-2026-11-09-06-42-30.jpg",
-    "cloudVideoUrl": "/drop1/VIDEO-2026-11-09-06-42-45.mp4",
-    "timestampKey": "06-42-30",
-    "tag": "Drop #10 • Favorito Sonora",
-    "slotsTotal": 5,
-    "slotsTaken": 0,
-    "description": "Clásico Ball Star en piel blanca lisa con puntera en gamuza gris suave, estrella y talón en negro contraste, agujetas crema y suela con acabado vintage envejecido."
-  },
-  {
-    "id": "gg-11",
-    "code": "SH-GG-11",
-    "name": "Golden Goose Super-Star \"Rose Glitter Heel & Taupe Star\"",
-    "brand": "Golden Goose Deluxe Brand",
-    "qualitySpec": "Full Set",
-    "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
-    "colorway": "Piel Blanco Hueso / Estrella Taupe / Puntera Gamuza Gris / Talón Glitter Rosa",
-    "photoRef": "PHOTO-2026-11-09-06-42-46.jpg",
-    "videoRef": "VIDEO-2026-11-09-06-43-22.mp4",
-    "cloudImageUrl": "/drop1/PHOTO-2026-11-09-06-42-46.jpg",
-    "cloudVideoUrl": "/drop1/VIDEO-2026-11-09-06-43-22.mp4",
-    "timestampKey": "06-42-46",
-    "tag": "Drop #11 • Últimos Lugares",
-    "slotsTotal": 5,
-    "slotsTaken": 0,
-    "description": "Silueta Super-Star en piel blanco hueso con puntera en gamuza gris, estrella en tono taupe/camel, talón en glitter rosa champán y agujetas crema."
-  }
-];
+
+    const DROPS_GG = [
+      {
+        "id": "gg-01",
+        "dropId": "drop1",
+        "folder": "drop1",
+        "category": "superstar",
+        "code": "SH-GG-01",
+        "name": "Golden Goose Super-Star \"Grey Star & White Luce Heel\"",
+        "brand": "Golden Goose Deluxe Brand",
+        "qualitySpec": "Full Set",
+        "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
+        "colorway": "Piel Blanca / Estrella Gamuza Gris / Talón Blanco Nacarado",
+        "photoRef": "PHOTO-2026-11-09-06-38-50.jpg",
+        "videoRef": "VIDEO-2026-11-09-06-39-00.mp4",
+        "tag": "Drop #01 • Top Seller",
+        "slotsTotal": 5,
+        "slotsTaken": 0,
+        "description": "Silueta clásica Super-Star en piel blanca suave con estrella y puntera en gamuza gris ceniza, talón blanco con brillo sutil y suela con acabado artesanal."
+      },
+      {
+        "id": "gg-02",
+        "dropId": "drop1",
+        "folder": "drop1",
+        "category": "ballstar",
+        "code": "SH-GG-02",
+        "name": "Golden Goose Ball Star \"Tan Suede / Desert Camel\"",
+        "brand": "Golden Goose Deluxe Brand",
+        "qualitySpec": "Full Set",
+        "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
+        "colorway": "Gamuza Camel Desierto / Piel Blanca / Estrella Tono Arena",
+        "photoRef": "PHOTO-2026-11-09-06-39-01.jpg",
+        "videoRef": "VIDEO-2026-11-09-06-39-23.mp4",
+        "tag": "Drop #01 • Favorito HMO",
+        "slotsTotal": 5,
+        "slotsTaken": 0,
+        "description": "Edición retro-basket Ball Star con paneles en gamuza camel/tabaco y piel blanca, perforaciones frontales y letras \"SNEA-KERS\" en el talón."
+      },
+      {
+        "id": "gg-03",
+        "dropId": "drop1",
+        "folder": "drop1",
+        "category": "ballstar",
+        "code": "SH-GG-03",
+        "name": "Golden Goose Ball Star \"Forest Green / Journey of Love\"",
+        "brand": "Golden Goose Deluxe Brand",
+        "qualitySpec": "Full Set",
+        "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
+        "colorway": "Piel Blanca / Estrella & Talón Verde Bosque / \"Journey of Love\"",
+        "photoRef": "PHOTO-2026-11-09-06-39-26.jpg",
+        "videoRef": "VIDEO-2026-11-09-06-39-42.mp4",
+        "tag": "Drop #01 • Edición Especial",
+        "slotsTotal": 5,
+        "slotsTaken": 0,
+        "description": "Edición especial Ball Star con caligrafía artística \"Journey of Love\" en la entresuela, estrella y talón en verde bosque intenso y puntera en gamuza gris."
+      },
+      {
+        "id": "gg-04",
+        "dropId": "drop1",
+        "folder": "drop1",
+        "category": "ballstar",
+        "code": "SH-GG-04",
+        "name": "Golden Goose Ball Star \"Sherpa & Grey Star / Dreamed in Venice\"",
+        "brand": "Golden Goose Deluxe Brand",
+        "qualitySpec": "Full Set",
+        "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
+        "colorway": "Cuello Borrega Crema / Estrella Gris / Inscripción \"Dreamed in Venice\"",
+        "photoRef": "PHOTO-2026-11-09-06-39-45.jpg",
+        "videoRef": "VIDEO-2026-11-09-06-40-05.mp4",
+        "tag": "Drop #01 • Detalle Artesanal",
+        "slotsTotal": 5,
+        "slotsTaken": 0,
+        "description": "Silueta Ball Star con forro interior tipo borrega sherpa en el cuello, estrella en gamuza gris y leyenda \"DREAMED IN VENICE\" en la suela."
+      },
+      {
+        "id": "gg-05",
+        "dropId": "drop1",
+        "folder": "drop1",
+        "category": "ballstar",
+        "code": "SH-GG-05",
+        "name": "Golden Goose Ball Star \"Navy Star / Gold Heel & Red Accent\"",
+        "brand": "Golden Goose Deluxe Brand",
+        "qualitySpec": "Full Set",
+        "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
+        "colorway": "Estrella Gamuza Azul Marino / Talón Dorado / Acento Rojo",
+        "photoRef": "PHOTO-2026-11-09-06-40-07.jpg",
+        "videoRef": "VIDEO-2026-11-09-06-40-25.mp4",
+        "tag": "Drop #01 • Edición Limitada",
+        "slotsTotal": 5,
+        "slotsTaken": 0,
+        "description": "Combinación de alto contraste con estrella en gamuza azul marino, talón metálico dorado con acento inferior en rojo carmesí y silueta Ball Star."
+      },
+      {
+        "id": "gg-06",
+        "dropId": "drop1",
+        "folder": "drop1",
+        "category": "superstar",
+        "code": "SH-GG-06",
+        "name": "Golden Goose Super-Star \"Black Heel & Classic Star\"",
+        "brand": "Golden Goose Deluxe Brand",
+        "qualitySpec": "Full Set",
+        "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
+        "colorway": "Piel Blanca / Talón Negro Contraste / Estrella Gamuza Gris",
+        "photoRef": "PHOTO-2026-11-09-06-40-27.jpg",
+        "videoRef": "VIDEO-2026-11-09-06-41-33.mp4",
+        "tag": "Drop #01 • Clásico Urbano",
+        "slotsTotal": 5,
+        "slotsTaken": 0,
+        "description": "Uno de los colorways más versátiles de Golden Goose con talón negro en piel, estrella en gamuza gris y acabado vintage artesanal."
+      },
+      {
+        "id": "gg-07",
+        "dropId": "drop1",
+        "folder": "drop1",
+        "category": "superstar",
+        "code": "SH-GG-07",
+        "name": "Golden Goose Super-Star \"Silver Star / Blue Heel & VSA Is For Lovers\"",
+        "brand": "Golden Goose Deluxe Brand",
+        "qualitySpec": "Full Set",
+        "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
+        "colorway": "Piel Crema / Estrella Plateada / Talón Azul Rey / Agujetas Logo Negras",
+        "photoRef": "PHOTO-2026-11-09-06-41-36.jpg",
+        "videoRef": "VIDEO-2026-11-09-06-41-51.mp4",
+        "tag": "Drop #01 • Selección Especial",
+        "slotsTotal": 5,
+        "slotsTaken": 0,
+        "description": "Silueta Super-Star en piel crema con estrella plateada metálica, talón azul rey, agujetas negras con tipografía Golden Goose e inscripción \"VSA IS FOR LOVERS\" en la suela."
+      },
+      {
+        "id": "gg-08",
+        "dropId": "drop1",
+        "folder": "drop1",
+        "category": "ballstar",
+        "code": "SH-GG-08",
+        "name": "Golden Goose Ball Star \"Cracked Leather / Black Star & Gum Sole\"",
+        "brand": "Golden Goose Deluxe Brand",
+        "qualitySpec": "Full Set",
+        "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
+        "colorway": "Piel Blanca / Puntera Craquelada / Estrella Negra / Suela Vintage Ámbar",
+        "photoRef": "PHOTO-2026-11-09-06-41-54.jpg",
+        "videoRef": "VIDEO-2026-11-09-06-42-02.mp4",
+        "tag": "Drop #01 • Edición Limitada",
+        "slotsTotal": 5,
+        "slotsTaken": 0,
+        "description": "Edición Ball Star en piel blanca granulada con puntera y talón en acabado craquelado, estrella y talón en negro contraste, agujetas crema y suela tono ámbar vintage."
+      },
+      {
+        "id": "gg-09",
+        "dropId": "drop1",
+        "folder": "drop1",
+        "category": "superstar",
+        "code": "SH-GG-09",
+        "name": "Golden Goose Super-Star \"Black Glitter Heel & Metallic Star\"",
+        "brand": "Golden Goose Deluxe Brand",
+        "qualitySpec": "Full Set",
+        "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
+        "colorway": "Piel Blanco Hueso / Estrella Metálica / Talón Glitter Negro / Agujetas Grises",
+        "photoRef": "PHOTO-2026-11-09-06-42-08.jpg",
+        "videoRef": "VIDEO-2026-11-09-06-42-24.mp4",
+        "tag": "Drop #01 • Nuevo Ingreso",
+        "slotsTotal": 5,
+        "slotsTaken": 0,
+        "description": "Silueta Super-Star en piel blanco hueso con estrella en acabado metálico champán, talón con glitter negro brillante, agujetas grises y suela con desgaste artesanal."
+      },
+      {
+        "id": "gg-10",
+        "dropId": "drop1",
+        "folder": "drop1",
+        "category": "ballstar",
+        "code": "SH-GG-10",
+        "name": "Golden Goose Ball Star \"Grey Suede Toe / Black Star & Cream Laces\"",
+        "brand": "Golden Goose Deluxe Brand",
+        "qualitySpec": "Full Set",
+        "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
+        "colorway": "Piel Blanca Lisa / Puntera Gamuza Gris / Estrella Negra / Suela Vintage",
+        "photoRef": "PHOTO-2026-11-09-06-42-30.jpg",
+        "videoRef": "VIDEO-2026-11-09-06-42-45.mp4",
+        "tag": "Drop #01 • Favorito Sonora",
+        "slotsTotal": 5,
+        "slotsTaken": 0,
+        "description": "Clásico Ball Star en piel blanca lisa con puntera en gamuza gris suave, estrella y talón en negro contraste, agujetas crema y suela con acabado vintage envejecido."
+      },
+      {
+        "id": "gg-11",
+        "dropId": "drop1",
+        "folder": "drop1",
+        "category": "superstar",
+        "code": "SH-GG-11",
+        "name": "Golden Goose Super-Star \"Rose Glitter Heel & Taupe Star\"",
+        "brand": "Golden Goose Deluxe Brand",
+        "qualitySpec": "Full Set",
+        "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
+        "colorway": "Piel Blanco Hueso / Estrella Taupe / Puntera Gamuza Gris / Talón Glitter Rosa",
+        "photoRef": "PHOTO-2026-11-09-06-42-46.jpg",
+        "videoRef": "VIDEO-2026-11-09-06-43-22.mp4",
+        "tag": "Drop #01 • Últimos Lugares",
+        "slotsTotal": 5,
+        "slotsTaken": 0,
+        "description": "Silueta Super-Star en piel blanco hueso con puntera en gamuza gris, estrella en tono taupe/camel, talón en glitter rosa champán y agujetas crema."
+      }
+    ];
+
+    const DROPS_AM90 = [
+      {
+        "id": "am-01",
+        "dropId": "drop2",
+        "folder": "drop2",
+        "category": "clasicos",
+        "code": "SH-AM-01",
+        "name": "Nike Air Max 90 \"Cool Grey & Royal Blue\"",
+        "brand": "Nike Sportswear • Air Max 90",
+        "qualitySpec": "Caja Original",
+        "packagingSpec": "Caja Clásica Naranja Nike",
+        "colorway": "Gris Acero / Swoosh & Cámara Air Azul Rey / Entresuela Blanca",
+        "photoRef": "164334A0-0976-4A25-9F38-3E6A70CC218F_1_105_c.jpeg",
+        "videoRef": null,
+        "tag": "Drop #02 • Clásico Urbano",
+        "slotsTotal": 5,
+        "slotsTaken": 0,
+        "description": "Combinación limpia en malla y piel gris acero con acentos vibrantes en azul rey sobre el Swoosh lateral, lengüeta y unidad Air Max visible."
+      },
+      {
+        "id": "am-02",
+        "dropId": "drop2",
+        "folder": "drop2",
+        "category": "clasicos",
+        "code": "SH-AM-02",
+        "name": "Nike Air Max 90 \"Triple White Classic\"",
+        "brand": "Nike Sportswear • Air Max 90",
+        "qualitySpec": "Caja Original",
+        "packagingSpec": "Caja Clásica Naranja Nike",
+        "colorway": "Blanco Total / Piel & Malla Transpirable / Unidad Air Cristalina",
+        "photoRef": "2338CC61-2C58-40BD-A34A-B1BA164DCF6B_1_105_c.jpeg",
+        "videoRef": null,
+        "tag": "Drop #02 • Top Seller",
+        "slotsTotal": 5,
+        "slotsTaken": 0,
+        "description": "El básico infaltable del streetwear. Construcción monocromática en piel blanca y malla técnica con ventana Air visible y máxima versatilidad."
+      },
+      {
+        "id": "am-03",
+        "dropId": "drop2",
+        "folder": "drop2",
+        "category": "clasicos",
+        "code": "SH-AM-03",
+        "name": "Nike Air Max 90 \"Iron Grey & Total Orange\"",
+        "brand": "Nike Sportswear • Air Max 90",
+        "qualitySpec": "Caja Original",
+        "packagingSpec": "Caja Clásica Naranja Nike",
+        "colorway": "Gris Carbón / Acentos Naranja Intenso / Swoosh Negro & Suela Blanca",
+        "photoRef": "39AD6C0D-E457-4FDD-A858-400361A8F625_1_105_c.jpeg",
+        "videoRef": null,
+        "tag": "Drop #02 • Favorito HMO",
+        "slotsTotal": 5,
+        "slotsTaken": 0,
+        "description": "Contraste agresivo en tonos gris hierro y negro con destellos naranja fuego en la placa Air Max lateral y la cápsula de aire trasera."
+      },
+      {
+        "id": "am-04",
+        "dropId": "drop2",
+        "folder": "drop2",
+        "category": "clasicos",
+        "code": "SH-AM-04",
+        "name": "Nike Air Max 90 \"Volt Neon & Grey Suede\"",
+        "brand": "Nike Sportswear • Air Max 90",
+        "qualitySpec": "Caja Original",
+        "packagingSpec": "Caja Clásica Naranja Nike",
+        "colorway": "Malla Blanca / Gamuza Gris / Guardabarros Negro / Acentos Volt Neón",
+        "photoRef": "625AD16A-5BEC-4CF5-AEC9-61DDAD7D669F_1_105_c.jpeg",
+        "videoRef": null,
+        "tag": "Drop #02 • OG Heritage",
+        "slotsTotal": 5,
+        "slotsTaken": 0,
+        "description": "ADN noventero puro con paneles en gamuza gris, guardabarros negro en piel y el icónico bloque amarillo neón Volt enmarcando la cámara de aire."
+      },
+      {
+        "id": "am-05",
+        "dropId": "drop2",
+        "folder": "drop2",
+        "category": "ediciones",
+        "code": "SH-AM-05",
+        "name": "Nike Air Max 90 \"Triple Black Cordura®\"",
+        "brand": "Nike Sportswear • Air Max 90",
+        "qualitySpec": "Caja Original",
+        "packagingSpec": "Caja Clásica Naranja Nike",
+        "colorway": "Negro Total / Tejido Técnico Cordura® / Piel Graneada & Air Oscuro",
+        "photoRef": "7BFBD780-6480-42AE-B531-B0B1C3DF0EC6_1_105_c.jpeg",
+        "videoRef": null,
+        "tag": "Drop #02 • Edición Cordura®",
+        "slotsTotal": 5,
+        "slotsTaken": 0,
+        "description": "Edición táctica de alta resistencia fabricada con textil certificado CORDURA® y piel negra mate. Uso rudo, repelente y estética stealth."
+      },
+      {
+        "id": "am-06",
+        "dropId": "drop2",
+        "folder": "drop2",
+        "category": "ediciones",
+        "code": "SH-AM-06",
+        "name": "Nike Air Max 90 \"Mocha Suede & Coral Pink\"",
+        "brand": "Nike Sportswear • Air Max 90",
+        "qualitySpec": "Caja Original",
+        "packagingSpec": "Caja Clásica Naranja Nike",
+        "colorway": "Gamuza Café Mocha / Swoosh & Forro Rosa Coral / Negro & Blanco",
+        "photoRef": "81C36BD7-F1AE-4915-9637-FF0FAF421B93_1_105_c.jpeg",
+        "videoRef": null,
+        "tag": "Drop #02 • Selección Especial",
+        "slotsTotal": 5,
+        "slotsTaken": 0,
+        "description": "Combinación de inspiración boutique con gamuza café mocha, guardabarros negro y acentos cálidos en rosa coral en Swoosh, forro y suela."
+      },
+      {
+        "id": "am-07",
+        "dropId": "drop2",
+        "folder": "drop2",
+        "category": "clasicos",
+        "code": "SH-AM-07",
+        "name": "Nike Air Max 90 \"Pastel Peach & Rose Taupe\"",
+        "brand": "Nike Sportswear • Air Max 90",
+        "qualitySpec": "Caja Original",
+        "packagingSpec": "Caja Clásica Naranja Nike",
+        "colorway": "Blanco / Rosa Taupe / Acentos Durazno Pastel & Crema Vainilla",
+        "photoRef": "9A832C7C-469D-4D53-B32B-630D88C39631_1_105_c.jpeg",
+        "videoRef": null,
+        "tag": "Drop #02 • Aesthetic Clean",
+        "slotsTotal": 5,
+        "slotsTaken": 0,
+        "description": "Paleta suave en tonos arena, rosa taupe y durazno pastel con cassette Air en color crema vainilla y Swoosh gris perla."
+      },
+      {
+        "id": "am-08",
+        "dropId": "drop2",
+        "folder": "drop2",
+        "category": "clasicos",
+        "code": "SH-AM-08",
+        "name": "Nike Air Max 90 \"Desert Wheat & Sail Cream\"",
+        "brand": "Nike Sportswear • Air Max 90",
+        "qualitySpec": "Caja Original",
+        "packagingSpec": "Caja Clásica Naranja Nike",
+        "colorway": "Camel Trigo / Malla & Swoosh Crema Sail / Detalles Café & Suela Gum",
+        "photoRef": "A1CC8A39-F184-4EE6-9171-6355EE2E97F6_1_105_c.jpeg",
+        "videoRef": null,
+        "tag": "Drop #02 • Favorito Sonora",
+        "slotsTotal": 5,
+        "slotsTaken": 0,
+        "description": "Tonos tierra perfectos para cualquier outfit: paneles en color camel trigo, malla tejida en crema hueso, Swoosh marfil y suela con tracción color miel."
+      },
+      {
+        "id": "am-09",
+        "dropId": "drop2",
+        "folder": "drop2",
+        "category": "ediciones",
+        "code": "SH-AM-09",
+        "name": "Nike Air Max 90 \"Lucha Libre • Técnicos vs Rudos\"",
+        "brand": "Nike Sportswear • Air Max 90",
+        "qualitySpec": "Caja Original",
+        "packagingSpec": "Caja Clásica Naranja Nike",
+        "colorway": "Blanco & Negro Charol / Inscripción \"Los Técnicos\" & \"Los Rudos\" / Máscara",
+        "photoRef": "DA6D78FA-0090-4BA5-B141-E2C417C1ACDC_1_105_c.jpeg",
+        "videoRef": null,
+        "tag": "Drop #02 • Edición Coleccionista",
+        "slotsTotal": 5,
+        "slotsTaken": 0,
+        "description": "Edición especial de colección inspirada en la Lucha Libre mexicana: diseño blanco y negro con emblema de máscara en el talón y leyendas \"LOS TÉCNICOS\" / \"LOS RUDOS\"."
+      },
+      {
+        "id": "am-10",
+        "dropId": "drop2",
+        "folder": "drop2",
+        "category": "ediciones",
+        "code": "SH-AM-10",
+        "name": "Nike Air Max 90 \"Valentine's Rose & Crimson Red\"",
+        "brand": "Nike Sportswear • Air Max 90",
+        "qualitySpec": "Caja Original",
+        "packagingSpec": "Caja Clásica Naranja Nike",
+        "colorway": "Piel Blanca / Gamuza Rosa Suave / Swoosh & Suela Rojo Carmesí",
+        "photoRef": "F012AF0F-2BB4-40C2-B081-C20E011A9AEA_1_105_c.jpeg",
+        "videoRef": null,
+        "tag": "Drop #02 • Edición Especial",
+        "slotsTotal": 5,
+        "slotsTaken": 0,
+        "description": "Contraste llamativo con base en piel blanca, guardabarros en gamuza rosa pastel y destellos en rojo carmesí en el Swoosh, lengüeta y suela."
+      },
+      {
+        "id": "am-11",
+        "dropId": "drop2",
+        "folder": "drop2",
+        "category": "ediciones",
+        "code": "SH-AM-11",
+        "name": "Nike Air Max 90 \"Día de Muertos • Cempasúchil\"",
+        "brand": "Nike Sportswear • Air Max 90",
+        "qualitySpec": "Caja Original",
+        "packagingSpec": "Caja Clásica Naranja Nike",
+        "colorway": "Naranja Cempasúchil / Verde Jade / Rosa Mexicano & Texturas Artesanales",
+        "photoRef": "F018CFED-2027-473C-A297-C53A255EC6BE_1_105_c.jpeg",
+        "videoRef": null,
+        "tag": "Drop #02 • Más Buscado",
+        "slotsTotal": 5,
+        "slotsTaken": 0,
+        "description": "Una de las ediciones más buscadas de Air Max 90: gráficos inspirados en el papel picado y la flor de cempasúchil, Swoosh verde texturizado y acentos en rosa mexicano."
+      }
+    ];
+
     const SIZES = ["24 cm", "25 cm", "26 cm", "27 cm", "28 cm", "29 cm"];
     const CITIES = [
-  {
-    "id": "hmo",
-    "name": "Hermosillo",
-    "partnerName": "Carlos",
-    "role": "Hub Central & Entregas Personales",
-    "phoneDisplay": "662 386 1533",
-    "whatsapp": "526623861533",
-    "deliverySpot": "Plaza Zaragoza o servicio a domicilio",
-    "deliveryOptions": [
-      "Punto de entrega: Plaza Zaragoza",
-      "Servicio a domicilio en Hermosillo"
-    ]
-  },
-  {
-    "id": "hmo-julio",
-    "name": "Hermosillo",
-    "partnerName": "Julio",
-    "role": "Socio Hermosillo Activo",
-    "phoneDisplay": "662 432 4212",
-    "whatsapp": "526624324212",
-    "deliverySpot": "Plaza Zaragoza o servicio a domicilio",
-    "deliveryOptions": [
-      "Punto de entrega: Plaza Zaragoza",
-      "Servicio a domicilio en Hermosillo"
-    ]
-  },
-  {
-    "id": "cab",
-    "name": "Caborca",
-    "partnerName": "José",
-    "role": "Socio Regional Activo",
-    "phoneDisplay": "637 378 0424",
-    "whatsapp": "526373780424",
-    "deliverySpot": "Domicilio hasta la puerta de tu casa",
-    "deliveryOptions": [
-      "Servicio a domicilio hasta la puerta de tu casa (Caborca)"
-    ]
-  },
-  {
-    "id": "slrc",
-    "name": "San Luis Río Colorado",
-    "partnerName": "Omar",
-    "role": "Socio Frontera Activo",
-    "phoneDisplay": "653 160 4404",
-    "whatsapp": "526531604404",
-    "deliverySpot": "Plaza Herradura o servicio a domicilio",
-    "deliveryOptions": [
-      "Punto de entrega: Plaza Herradura",
-      "Servicio a domicilio en SLRC"
-    ]
-  },
-  {
-    "id": "can",
-    "name": "Cananea",
-    "partnerName": "Germán",
-    "role": "Socio Sierra / Minera",
-    "phoneDisplay": "645 113 5478",
-    "whatsapp": "526451135478",
-    "deliverySpot": "Plaza Centenario o servicio a domicilio",
-    "deliveryOptions": [
-      "Punto de entrega: Plaza Centenario",
-      "Servicio a domicilio en Cananea"
-    ]
-  },
-  {
-    "id": "hua",
-    "name": "Huachinera",
-    "partnerName": "Brayan",
-    "role": "Socio Sierra Alta",
-    "phoneDisplay": "633 132 0733",
-    "whatsapp": "526331320733",
-    "deliverySpot": "Plaza Pública Juárez o servicio a domicilio",
-    "deliveryOptions": [
-      "Punto de entrega: Plaza Pública Juárez",
-      "Servicio a domicilio en Huachinera"
-    ]
-  }
-];
+      {
+        "id": "hmo",
+        "name": "Hermosillo",
+        "partnerName": "Carlos",
+        "role": "Hub Central & Entregas Personales",
+        "phoneDisplay": "662 386 1533",
+        "whatsapp": "526623861533",
+        "deliverySpot": "Plaza Zaragoza o servicio a domicilio",
+        "deliveryOptions": [
+          "Punto de entrega: Plaza Zaragoza",
+          "Servicio a domicilio en Hermosillo"
+        ]
+      },
+      {
+        "id": "hmo-julio",
+        "name": "Hermosillo",
+        "partnerName": "Julio",
+        "role": "Socio Hermosillo Activo",
+        "phoneDisplay": "662 432 4212",
+        "whatsapp": "526624324212",
+        "deliverySpot": "Plaza Zaragoza o servicio a domicilio",
+        "deliveryOptions": [
+          "Punto de entrega: Plaza Zaragoza",
+          "Servicio a domicilio en Hermosillo"
+        ]
+      },
+      {
+        "id": "cab",
+        "name": "Caborca",
+        "partnerName": "José",
+        "role": "Socio Regional Activo",
+        "phoneDisplay": "637 378 0424",
+        "whatsapp": "526373780424",
+        "deliverySpot": "Domicilio hasta la puerta de tu casa",
+        "deliveryOptions": [
+          "Servicio a domicilio hasta la puerta de tu casa (Caborca)"
+        ]
+      },
+      {
+        "id": "slrc",
+        "name": "San Luis Río Colorado",
+        "partnerName": "Omar",
+        "role": "Socio Frontera Activo",
+        "phoneDisplay": "653 160 4404",
+        "whatsapp": "526531604404",
+        "deliverySpot": "Plaza Herradura o servicio a domicilio",
+        "deliveryOptions": [
+          "Punto de entrega: Plaza Herradura",
+          "Servicio a domicilio en SLRC"
+        ]
+      },
+      {
+        "id": "can",
+        "name": "Cananea",
+        "partnerName": "Germán",
+        "role": "Socio Sierra / Minera",
+        "phoneDisplay": "645 113 5478",
+        "whatsapp": "526451135478",
+        "deliverySpot": "Plaza Centenario o servicio a domicilio",
+        "deliveryOptions": [
+          "Punto de entrega: Plaza Centenario",
+          "Servicio a domicilio en Cananea"
+        ]
+      },
+      {
+        "id": "hua",
+        "name": "Huachinera",
+        "partnerName": "Brayan",
+        "role": "Socio Sierra Alta",
+        "phoneDisplay": "633 132 0733",
+        "whatsapp": "526331320733",
+        "deliverySpot": "Plaza Pública Juárez o servicio a domicilio",
+        "deliveryOptions": [
+          "Punto de entrega: Plaza Pública Juárez",
+          "Servicio a domicilio en Huachinera"
+        ]
+      }
+    ];
 
     function SneakerHypeApp() {
+      const [activeDrop, setActiveDrop] = useState(() => {
+        if (typeof window !== "undefined" && window.location.hash === "#drop1") return "drop1";
+        return "drop2";
+      });
       const [city, setCity] = useState(CITIES[0]);
       const [sizes, setSizes] = useState({});
       const [mediaTab, setMediaTab] = useState({});
@@ -353,17 +608,29 @@
       const [showPinModal, setShowPinModal] = useState(false);
       const [pinInput, setPinInput] = useState("");
       const [pinError, setPinError] = useState("");
-      const [partnerCity, setPartnerCity] = useState("Hermosillo (Julio)");
+      const [partnerCity, setPartnerCity] = useState("Caborca");
       const [partnerWeeklyPairs, setPartnerWeeklyPairs] = useState(4);
-      const [partnerSalePrice, setPartnerSalePrice] = useState(2700);
+      const [partnerSalePrices, setPartnerSalePrices] = useState({ drop1: 2700, drop2: 1900 });
       const [silhouetteFilter, setSilhouetteFilter] = useState("all");
       const [zoomItem, setZoomItem] = useState(null);
       const [openFaq, setOpenFaq] = useState(null);
       const [copiedLink, setCopiedLink] = useState(false);
       const [timeLeft, setTimeLeft] = useState({ days: 3, hours: 14, minutes: 20, seconds: 45 });
 
+      const currentDropConfig = DROP_CONFIGS[activeDrop];
+      const currentCatalog = activeDrop === "drop1" ? DROPS_GG : DROPS_AM90;
+      const partnerSalePrice = partnerSalePrices[activeDrop];
+
+      const handleSelectDrop = (dropId) => {
+        setActiveDrop(dropId);
+        setSilhouetteFilter("all");
+      };
+
+      const handlePartnerPriceChange = (val) => {
+        setPartnerSalePrices(prev => ({ ...prev, [activeDrop]: val }));
+      };
+
       useEffect(() => {
-        // Cierre dinámico del Drop (ciclo al siguiente domingo a las 23:59:59)
         const getNextSunday = () => {
           const now = new Date();
           const day = now.getDay();
@@ -388,19 +655,19 @@
       }, []);
 
       const handleShareCatalog = async () => {
-        const shareText = `¡Checa el Drop #01 de Golden Goose en SneakerHype Sonora! 🔥 Full Set, apartas con $1,500 y liquidas al recibir en tu ciudad (${city.name} con ${city.partnerName}).`;
+        const shareText = `¡Checa el ${currentDropConfig.fullName} en SneakerHype Sonora! 🔥 Apartas con ${formatMXN(currentDropConfig.depositPrice)} y liquidas ${formatMXN(currentDropConfig.remainingPrice)} al recibir en tu ciudad (${city.name}).`;
         const shareUrl = window.location.href;
 
         if (navigator.share) {
           try {
             await navigator.share({
-              title: "SneakerHype HMO • Drop #01 Golden Goose",
+              title: `SneakerHype HMO • ${currentDropConfig.fullName}`,
               text: shareText,
               url: shareUrl
             });
             return;
           } catch (err) {
-            // Si el usuario cancela o no soporta, pasa al portapapeles
+            // fallback
           }
         }
         if (navigator.clipboard) {
@@ -415,13 +682,12 @@
       };
 
       const filteredDrops = useMemo(() => {
-        if (silhouetteFilter === "superstar") return DROPS.filter(d => d.name.includes("Super-Star"));
-        if (silhouetteFilter === "ballstar") return DROPS.filter(d => d.name.includes("Ball Star"));
-        return DROPS;
-      }, [silhouetteFilter]);
+        if (silhouetteFilter === "all") return currentCatalog;
+        return currentCatalog.filter(d => d.category === silhouetteFilter);
+      }, [currentCatalog, silhouetteFilter]);
 
       const partnerCalculations = useMemo(() => {
-        const unitProfitPartner = partnerSalePrice - PRICING_RULES.wholesalePrice;
+        const unitProfitPartner = partnerSalePrice - currentDropConfig.wholesalePrice;
         const weeklyProfitPartner = unitProfitPartner * partnerWeeklyPairs;
         const monthlyProfitPartner = weeklyProfitPartner * 4;
         return {
@@ -429,7 +695,7 @@
           weeklyProfitPartner,
           monthlyProfitPartner
         };
-      }, [partnerWeeklyPairs, partnerSalePrice]);
+      }, [partnerWeeklyPairs, partnerSalePrice, currentDropConfig]);
 
       const handlePinSubmit = async (e) => {
         e.preventDefault();
@@ -446,20 +712,18 @@
 
       const getSize = (id) => sizes[id] || "26 cm";
 
-      // Lista de rutas donde GitHub / Vercel / Netlify pueden haber guardado tus fotos y videos
-      const getCandidatePaths = (fileName) => [
-        "./drop1/" + fileName,
-        "/drop1/" + fileName,
-        "./" + fileName,
-        "/" + fileName,
-        "./Golden Goose/" + fileName,
-        "./drop1/Golden Goose/" + fileName
+      const getCandidatePaths = (fileName, folder = "drop1") => [
+        `./${folder}/${fileName}`,
+        `/${folder}/${fileName}`,
+        `./${fileName}`,
+        `/${fileName}`
       ];
 
-      const getMediaSrc = (id, type, fileName) => {
+      const getMediaSrc = (id, type, fileName, folder = "drop1") => {
+        if (!fileName) return null;
         const key = id + "-" + type;
         const idx = pathTryMap[key] || 0;
-        const candidates = getCandidatePaths(fileName);
+        const candidates = getCandidatePaths(fileName, folder);
         return idx < candidates.length ? candidates[idx] : null;
       };
 
@@ -468,11 +732,13 @@
         setPathTryMap(prev => ({ ...prev, [key]: (prev[key] || 0) + 1 }));
       };
 
+      const modalDropConfig = modalItem ? DROP_CONFIGS[modalItem.dropId || activeDrop] : currentDropConfig;
+
       return (
         <div className="min-h-screen bg-stone-950 text-stone-100">
           <div className="bg-gradient-to-r from-orange-950 via-stone-900 to-orange-950 border-b border-orange-500/30 px-4 py-2 text-xs">
             <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-              <span className="text-amber-300 font-bold">🔥 SNEAKERHYPE HMO • PLATAFORMA DE DROPS EXCLUSIVOS EN SONORA</span>
+              <span className="text-amber-300 font-bold">🔥 SNEAKERHYPE HMO • 2 DROPS ACTIVOS EN PARALELO EN SONORA</span>
               <div className="flex items-center gap-3">
                 <span className="text-stone-300">Modelo: <strong>Apartado + Liquidación al Recibir</strong></span>
                 <a href="https://instagram.com/sneaker_hypehmo" target="_blank" className="text-orange-400 font-bold">@sneaker_hypehmo</a>
@@ -512,19 +778,61 @@
               </div>
             </div>
           </header>
-          <main className="max-w-7xl mx-auto px-4 py-8 space-y-8">
+
+          <main className="max-w-7xl mx-auto px-4 py-6 space-y-8">
+            {/* Pestañas de selección de Drop (Venta en Paralelo) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-stone-900/90 p-2 rounded-3xl border border-stone-800 shadow-xl">
+              <button
+                onClick={() => handleSelectDrop("drop2")}
+                className={"p-4 rounded-2xl text-left transition flex items-center justify-between gap-3 border " + (activeDrop === "drop2" ? "bg-gradient-to-r from-orange-600 to-amber-600 text-white border-orange-400 shadow-lg shadow-orange-600/25" : "bg-stone-950/70 text-stone-300 border-stone-800 hover:border-stone-700")}
+              >
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className={"px-2 py-0.5 rounded-full text-[10px] font-black uppercase " + (activeDrop === "drop2" ? "bg-stone-950/30 text-white" : "bg-orange-500/20 text-orange-400")}>
+                      ⚡ NUEVO • DROP #02
+                    </span>
+                    <span className="text-[11px] font-bold opacity-90">11 Siluetas</span>
+                  </div>
+                  <p className="text-base sm:text-lg font-black mt-1">Nike Air Max 90 Edition</p>
+                  <p className={"text-xs mt-0.5 " + (activeDrop === "drop2" ? "text-orange-100" : "text-stone-400")}>
+                    Apartas con <strong>$1,200</strong> • Liquidas <strong>$700</strong> al recibir (Total $1,900)
+                  </p>
+                </div>
+                <span className="text-xl font-black">→</span>
+              </button>
+
+              <button
+                onClick={() => handleSelectDrop("drop1")}
+                className={"p-4 rounded-2xl text-left transition flex items-center justify-between gap-3 border " + (activeDrop === "drop1" ? "bg-gradient-to-r from-orange-600 to-amber-600 text-white border-orange-400 shadow-lg shadow-orange-600/25" : "bg-stone-950/70 text-stone-300 border-stone-800 hover:border-stone-700")}
+              >
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className={"px-2 py-0.5 rounded-full text-[10px] font-black uppercase " + (activeDrop === "drop1" ? "bg-stone-950/30 text-white" : "bg-amber-500/20 text-amber-300")}>
+                      🔥 ACTIVO • DROP #01
+                    </span>
+                    <span className="text-[11px] font-bold opacity-90">11 Siluetas</span>
+                  </div>
+                  <p className="text-base sm:text-lg font-black mt-1">Golden Goose Full Set</p>
+                  <p className={"text-xs mt-0.5 " + (activeDrop === "drop1" ? "text-orange-100" : "text-stone-400")}>
+                    Apartas con <strong>$1,500</strong> • Liquidas <strong>$1,200</strong> al recibir (Total $2,700)
+                  </p>
+                </div>
+                <span className="text-xl font-black">→</span>
+              </button>
+            </div>
+
             <div className="rounded-3xl bg-gradient-to-br from-stone-900 via-stone-900 to-orange-950/40 border border-stone-800 p-6 sm:p-8 space-y-6">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <span className="px-3 py-1 rounded-full bg-orange-500/20 text-orange-300 text-xs font-bold flex items-center gap-1.5">
                   <span className="h-2 w-2 rounded-full bg-orange-400 animate-pulse"></span>
-                  DROP #01 ACTIVO • Golden Goose (Full Set)
+                  {currentDropConfig.badgeText}
                 </span>
                 <div className="flex items-center gap-2 bg-stone-950/90 border border-amber-500/30 px-3.5 py-1.5 rounded-2xl">
                   <span className="relative flex h-2.5 w-2.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
                   </span>
-                  <span className="text-xs font-bold text-amber-300 uppercase tracking-wider">Cierre de Pedidos Drop #01:</span>
+                  <span className="text-xs font-bold text-amber-300 uppercase tracking-wider">Cierre Batch Drop #{currentDropConfig.number}:</span>
                   <div className="flex items-center gap-1 font-mono text-xs font-black text-white">
                     <span className="bg-stone-900 px-1.5 py-0.5 rounded border border-stone-800">{String(timeLeft.days).padStart(2, '0')}d</span>:
                     <span className="bg-stone-900 px-1.5 py-0.5 rounded border border-stone-800">{String(timeLeft.hours).padStart(2, '0')}h</span>:
@@ -536,58 +844,78 @@
 
               <div>
                 <h2 className="text-2xl sm:text-4xl font-black text-white leading-tight">
-                  Drops exclusivos bajo pedido con entrega y liquidación física en <span className="text-orange-500">Sonora</span>.
+                  {activeDrop === "drop2" ? (
+                    <>Drop #02 <span className="text-orange-500">Nike Air Max 90</span>: aparta con $1,200 y liquida en mano en <span className="text-orange-500">Sonora</span>.</>
+                  ) : (
+                    <>Drop #01 <span className="text-orange-500">Golden Goose Full Set</span> con entrega y liquidación física en <span className="text-orange-500">Sonora</span>.</>
+                  )}
                 </h2>
                 <p className="text-sm text-stone-300 mt-2 max-w-3xl leading-relaxed">
-                  Importamos las siluetas más buscadas del streetwear internacional. Aseguras tu slot de importación con un anticipo inicial (<span className="text-orange-400 font-bold">$1,500 MXN en Drop #01</span>) y liquidas el restante (<span className="text-emerald-400 font-bold">$1,200 MXN</span>) únicamente al recibir en mano en tu ciudad.
+                  Importamos las siluetas más buscadas del streetwear internacional. Aseguras tu slot de importación en <strong>{currentDropConfig.name}</strong> con un anticipo inicial (<span className="text-orange-400 font-bold">{formatMXN(currentDropConfig.depositPrice)} MXN</span>) y liquidas el restante (<span className="text-emerald-400 font-bold">{formatMXN(currentDropConfig.remainingPrice)} MXN</span> • Total <strong>{formatMXN(currentDropConfig.totalPublicPrice)} MXN</strong>) únicamente al recibir en mano en tu ciudad.
                 </p>
               </div>
 
-              <div className="space-y-2.5 pt-1">
-                <p className="text-xs font-bold text-stone-400 uppercase tracking-wider">
-                  Selecciona tu ciudad y socio oficial para entrega personal:
-                </p>
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div className="flex flex-wrap gap-2">
-                    {CITIES.map(c => (
-                      <button
-                        key={c.id}
-                        onClick={() => setCity(c)}
-                        className={"px-4 py-2 rounded-xl text-xs font-bold border transition " + (city.id === c.id ? "bg-orange-600 text-white border-orange-400 shadow-lg shadow-orange-600/20" : "bg-stone-900 text-stone-400 border-stone-800 hover:border-stone-700")}
-                      >
-                        📍 {c.name} • {c.partnerName} ({c.phoneDisplay})
-                      </button>
-                    ))}
-                  </div>
-
-                  <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
+                <div className="flex flex-wrap gap-2">
+                  {CITIES.map(c => (
                     <button
-                      onClick={handleShareCatalog}
-                      className="px-3.5 py-2 rounded-xl bg-stone-950 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-700 text-xs font-bold transition flex items-center gap-1.5"
+                      key={c.id}
+                      onClick={() => setCity(c)}
+                      className={"px-4 py-2 rounded-xl text-xs font-bold border transition " + (city.id === c.id ? "bg-orange-600 text-white border-orange-400 shadow-lg shadow-orange-600/20" : "bg-stone-900 text-stone-400 border-stone-800 hover:border-stone-700")}
                     >
-                      <span>{copiedLink ? "✓ Enlace copiado" : "🔗 Copiar link"}</span>
+                      📍 {c.name} • {c.partnerName} ({c.phoneDisplay})
                     </button>
-                    <a
-                      href={"https://wa.me/?text=" + encodeURIComponent("¡Checa el Drop #01 de Golden Goose en SneakerHype Sonora! 🔥 Full Set, apartas con $1,500 MXN y liquidas al recibir en tu ciudad (" + city.name + " con " + city.partnerName + "): " + (typeof window !== "undefined" ? window.location.href : ""))}
-                      target="_blank"
-                      className="px-3.5 py-2 rounded-xl bg-emerald-600/90 hover:bg-emerald-500 text-white text-xs font-black transition flex items-center gap-1.5 shadow"
-                    >
-                      <span>💬 Enviar por WhatsApp</span>
-                    </a>
-                  </div>
+                  ))}
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={handleShareCatalog}
+                    className="px-3.5 py-2 rounded-xl bg-stone-950 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-700 text-xs font-bold transition flex items-center gap-1.5"
+                  >
+                    <span>{copiedLink ? "✓ Enlace copiado" : "🔗 Copiar link"}</span>
+                  </button>
+                  <a
+                    href={"https://wa.me/?text=" + encodeURIComponent(`¡Checa el ${currentDropConfig.fullName} en SneakerHype Sonora! 🔥 Apartas con ${formatMXN(currentDropConfig.depositPrice)} MXN y liquidas ${formatMXN(currentDropConfig.remainingPrice)} al recibir en tu ciudad (${city.name}): ` + (typeof window !== "undefined" ? window.location.href : ""))}
+                    target="_blank"
+                    className="px-3.5 py-2 rounded-xl bg-emerald-600/90 hover:bg-emerald-500 text-white text-xs font-black transition flex items-center gap-1.5 shadow"
+                  >
+                    <span>💬 Enviar por WhatsApp</span>
+                  </a>
                 </div>
               </div>
             </div>
+
             {isPartnerMode && (
               <section className="rounded-3xl bg-stone-900 border border-emerald-500/40 p-6 sm:p-8 space-y-6 shadow-2xl">
                 <div className="flex flex-wrap items-center justify-between gap-4 border-b border-stone-800 pb-4">
                   <div>
                     <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold">🔓 Acceso Privado • Red de Socios Sonora</span>
-                    <h2 className="text-xl sm:text-2xl font-black text-white mt-2">Calculadora de Ganancias &amp; Precio Mayoreo</h2>
-                    <p className="text-xs text-stone-400 mt-1">Simula tu utilidad semanal y mensual operando sin capital inicial (el apartado de $1,500 cubre el costo base).</p>
+                    <h2 className="text-xl sm:text-2xl font-black text-white mt-2">Calculadora de Ganancias &amp; Precio Mayoreo ({currentDropConfig.name})</h2>
+                    <p className="text-xs text-stone-400 mt-1">
+                      Simula tu utilidad operando sin capital inicial en <strong>{currentDropConfig.fullName}</strong>.
+                    </p>
                   </div>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      onClick={() => handleSelectDrop("drop2")}
+                      className={"px-3 py-1.5 rounded-xl text-xs font-black border " + (activeDrop === "drop2" ? "bg-orange-600 text-white border-orange-400" : "bg-stone-950 text-stone-400 border-stone-800")}
+                    >
+                      Drop #02 Air Max 90 ($1,200 Socio)
+                    </button>
+                    <button
+                      onClick={() => handleSelectDrop("drop1")}
+                      className={"px-3 py-1.5 rounded-xl text-xs font-black border " + (activeDrop === "drop1" ? "bg-orange-600 text-white border-orange-400" : "bg-stone-950 text-stone-400 border-stone-800")}
+                    >
+                      Drop #01 Golden Goose ($1,900 Socio)
+                    </button>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <span className="text-xs text-stone-400 font-bold">Municipio del Socio:</span>
                   <div className="flex flex-wrap gap-1.5">
-                    {["Hermosillo (Julio)", "Caborca (José)", "San Luis Río Colorado (Omar)", "Cananea (Germán)", "Huachinera (Brayan)"].map(p => (
+                    {["Hermosillo (Julio)", "Caborca", "San Luis Río Colorado", "Cananea", "Huachinera"].map(p => (
                       <button
                         key={p}
                         onClick={() => setPartnerCity(p)}
@@ -598,6 +926,7 @@
                     ))}
                   </div>
                 </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="bg-stone-950 p-4 rounded-2xl border border-stone-800 space-y-2">
                     <div className="flex justify-between text-xs">
@@ -615,25 +944,30 @@
                   </div>
                   <div className="bg-stone-950 p-4 rounded-2xl border border-stone-800 space-y-2">
                     <div className="flex justify-between text-xs">
-                      <span className="text-stone-400 font-bold">Precio venta en {partnerCity}:</span>
+                      <span className="text-stone-400 font-bold">Precio venta en {partnerCity} ({currentDropConfig.name}):</span>
                       <span className="text-emerald-400 font-black">{formatMXN(partnerSalePrice)}</span>
                     </div>
                     <input
                       type="range"
-                      min="2300"
-                      max="3500"
+                      min={currentDropConfig.partnerSliderMin}
+                      max={currentDropConfig.partnerSliderMax}
                       step="100"
                       value={partnerSalePrice}
-                      onChange={(e) => setPartnerSalePrice(Number(e.target.value))}
+                      onChange={(e) => handlePartnerPriceChange(Number(e.target.value))}
                       className="w-full accent-emerald-500 cursor-pointer"
                     />
                   </div>
                 </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
                   <div className="bg-stone-950 p-4 rounded-2xl border border-orange-500/30">
-                    <span className="text-[10px] font-bold uppercase text-orange-400 block">Costo Mayoreo</span>
-                    <span className="text-xl font-black text-orange-400">{formatMXN(PRICING_RULES.wholesalePrice)}</span>
-                    <span className="text-[10px] text-stone-400 block">($1,500 anticipo + $400 al entregar)</span>
+                    <span className="text-[10px] font-bold uppercase text-orange-400 block">Costo Socio ({currentDropConfig.name})</span>
+                    <span className="text-xl font-black text-orange-400">{formatMXN(currentDropConfig.wholesalePrice)}</span>
+                    <span className="text-[10px] text-stone-400 block">
+                      {currentDropConfig.partnerRemainingTransfer > 0
+                        ? `(${formatMXN(currentDropConfig.depositPrice)} anticipo + ${formatMXN(currentDropConfig.partnerRemainingTransfer)} al entregar)`
+                        : `(Cubierto 100% con el anticipo de ${formatMXN(currentDropConfig.depositPrice)})`}
+                    </span>
                   </div>
                   <div className="bg-stone-950 p-4 rounded-2xl border border-blue-500/30">
                     <span className="text-[10px] font-bold uppercase text-blue-400 block">Inversión del Socio</span>
@@ -646,28 +980,45 @@
                     <span className="text-[10px] text-stone-400 block">Libre por par al entregar</span>
                   </div>
                 </div>
+
                 <div className="bg-stone-950/80 rounded-2xl p-4 border border-stone-800 text-xs space-y-2">
                   <p className="font-bold text-amber-400 uppercase tracking-wider text-[11px] flex items-center gap-1.5">
-                    <span>⚡</span> Mecánica de Flujo 0 Inversión para Socios
+                    <span>⚡</span> Mecánica de Flujo 0 Inversión • {currentDropConfig.fullName}
                   </p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-stone-300 text-[11px]">
-                    <div className="bg-stone-900 p-2.5 rounded-xl border border-stone-800">
-                      <span className="font-bold text-orange-400 block">Paso 1: Apartado ($0 de tu bolsa)</span>
-                      <span>Tu cliente te transfiere $1,500 MXN. Transfieres esos mismos $1,500 a SneakerHype central para pedir el par.</span>
+                  {activeDrop === "drop2" ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-stone-300 text-[11px]">
+                      <div className="bg-stone-900 p-2.5 rounded-xl border border-stone-800">
+                        <span className="font-bold text-orange-400 block">Paso 1: Apartado ($0 de tu bolsa)</span>
+                        <span>Tu cliente aparta con <strong>$1,200 MXN</strong>. Transfieres esos mismos $1,200 a SneakerHype central y tu par queda 100% liquidado a precio socio.</span>
+                      </div>
+                      <div className="bg-stone-900 p-2.5 rounded-xl border border-stone-800">
+                        <span className="font-bold text-emerald-400 block">Paso 2: Entrega y Ganancia 100% Libre</span>
+                        <span>Al entregar el par, tu cliente liquida los <strong>$700 MXN</strong> restantes (total $1,900) y te quedas con los <strong>+$700 MXN netos</strong> íntegros en tu mano.</span>
+                      </div>
                     </div>
-                    <div className="bg-stone-900 p-2.5 rounded-xl border border-stone-800">
-                      <span className="font-bold text-emerald-400 block">Paso 2: Entrega y Ganancia</span>
-                      <span>Tu cliente te liquida $1,200 MXN. Transfieres $400 para completar tus $1,900 de costo y te quedas con <strong>+$800 MXN netos</strong> en mano.</span>
+                  ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-stone-300 text-[11px]">
+                      <div className="bg-stone-900 p-2.5 rounded-xl border border-stone-800">
+                        <span className="font-bold text-orange-400 block">Paso 1: Apartado ($0 de tu bolsa)</span>
+                        <span>Tu cliente te transfiere $1,500 MXN. Transfieres esos mismos $1,500 a SneakerHype central para pedir el par.</span>
+                      </div>
+                      <div className="bg-stone-900 p-2.5 rounded-xl border border-stone-800">
+                        <span className="font-bold text-emerald-400 block">Paso 2: Entrega y Ganancia</span>
+                        <span>Tu cliente te liquida $1,200 MXN. Transfieres $400 para completar tus $1,900 de costo y te quedas con <strong>+$800 MXN netos</strong> en mano.</span>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
+
                 <div className="bg-stone-950 rounded-2xl p-5 border border-stone-800 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-amber-400">Utilidad Mensual Socio ({partnerCity})</p>
+                    <p className="text-xs font-bold uppercase tracking-wider text-amber-400">Utilidad Mensual Socio ({partnerCity} • {currentDropConfig.name})</p>
                     <p className="text-3xl font-black text-white mt-1">
                       {formatMXN(partnerCalculations.monthlyProfitPartner)} <span className="text-xs font-normal text-stone-400">/ mes</span>
                     </p>
-                    <p className="text-xs text-stone-400 mt-1">Sin invertir capital inicial (el apartado del cliente cubre el pedido).</p>
+                    <p className="text-xs text-stone-400 mt-1">
+                      Venta directa Central HMO (sin socio): <strong>+{formatMXN(currentDropConfig.ownerDirectProfit)} MXN</strong> netos/par (Costo base: {formatMXN(currentDropConfig.ownerCost)} • Utilidad venta a socio: +{formatMXN(currentDropConfig.ownerPartnerProfit)}).
+                    </p>
                   </div>
                   <div className="sm:text-right">
                     <span className="text-[10px] font-bold uppercase text-stone-400 block">Utilidad Semanal Estimada</span>
@@ -676,46 +1027,68 @@
                 </div>
               </section>
             )}
+
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <h3 className="text-sm font-black uppercase tracking-wider text-stone-300">Catálogo Drop #01 • Golden Goose ({filteredDrops.length})</h3>
+              <div>
+                <h3 className="text-sm font-black uppercase tracking-wider text-stone-300">
+                  Catálogo {currentDropConfig.fullName} ({filteredDrops.length})
+                </h3>
+                <p className="text-xs text-stone-400">
+                  Apartas hoy con <strong className="text-orange-400">{formatMXN(currentDropConfig.depositPrice)}</strong> + Liquidas <strong className="text-emerald-400">{formatMXN(currentDropConfig.remainingPrice)}</strong> al recibir en {city.name} (Total: {formatMXN(currentDropConfig.totalPublicPrice)} MXN)
+                </p>
+              </div>
               <div className="flex flex-wrap gap-2">
-                {[
-                  { id: "all", label: "Todos (" + DROPS.length + ")" },
-                  { id: "superstar", label: "Super-Star (" + DROPS.filter(d => d.name.includes("Super-Star")).length + ")" },
-                  { id: "ballstar", label: "Ball Star (" + DROPS.filter(d => d.name.includes("Ball Star")).length + ")" }
-                ].map(f => (
-                  <button
-                    key={f.id}
-                    onClick={() => setSilhouetteFilter(f.id)}
-                    className={"px-3.5 py-1.5 rounded-xl text-xs font-bold border transition " + (silhouetteFilter === f.id ? "bg-orange-600 text-white border-orange-400" : "bg-stone-900 text-stone-400 border-stone-800 hover:border-stone-700")}
-                  >
-                    {f.label}
-                  </button>
-                ))}
+                {currentDropConfig.filters.map(f => {
+                  const count = f.id === "all" ? currentCatalog.length : currentCatalog.filter(d => d.category === f.id).length;
+                  return (
+                    <button
+                      key={f.id}
+                      onClick={() => setSilhouetteFilter(f.id)}
+                      className={"px-3.5 py-1.5 rounded-xl text-xs font-bold border transition " + (silhouetteFilter === f.id ? "bg-orange-600 text-white border-orange-400" : "bg-stone-900 text-stone-400 border-stone-800 hover:border-stone-700")}
+                    >
+                      {f.label} ({count})
+                    </button>
+                  );
+                })}
               </div>
             </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredDrops.map(item => {
-                const mode = mediaTab[item.id] || "photo";
+                const itemDrop = DROP_CONFIGS[item.dropId || activeDrop];
+                const hasVideo = Boolean(item.videoRef);
+                const mode = hasVideo ? (mediaTab[item.id] || "photo") : "photo";
                 const sz = getSize(item.id);
                 const slotsLeft = Math.max(0, item.slotsTotal - item.slotsTaken);
                 const slotsPct = Math.min(100, Math.round((item.slotsTaken / item.slotsTotal) * 100));
+                const photoSrc = getMediaSrc(item.id, "photo", item.photoRef, item.folder);
+                const videoSrc = hasVideo ? getMediaSrc(item.id, "video", item.videoRef, item.folder) : null;
+
                 return (
                   <div key={item.id} className="bg-stone-900 border border-stone-800 rounded-3xl overflow-hidden flex flex-col justify-between shadow-xl">
                     <div>
                       <div className="relative h-64 bg-stone-950 p-3 flex flex-col justify-between">
                         <div className="flex items-center justify-between z-10">
                           <span className="px-2.5 py-1 rounded-full text-[11px] font-bold bg-stone-900 text-amber-400 border border-amber-500/30">{item.tag}</span>
-                          <div className="flex gap-1 bg-stone-900 p-1 rounded-xl border border-stone-700">
-                            <button onClick={() => setMediaTab({...mediaTab, [item.id]: "photo"})} className={"px-2.5 py-1 rounded-lg text-[10px] font-bold " + (mode === "photo" ? "bg-orange-600 text-white" : "text-stone-400")}>Foto</button>
-                            <button onClick={() => setMediaTab({...mediaTab, [item.id]: "video"})} className={"px-2.5 py-1 rounded-lg text-[10px] font-bold " + (mode === "video" ? "bg-orange-600 text-white" : "text-stone-400")}>Video 360°</button>
-                          </div>
+                          {hasVideo ? (
+                            <div className="flex gap-1 bg-stone-900 p-1 rounded-xl border border-stone-700">
+                              <button onClick={() => setMediaTab({...mediaTab, [item.id]: "photo"})} className={"px-2.5 py-1 rounded-lg text-[10px] font-bold " + (mode === "photo" ? "bg-orange-600 text-white" : "text-stone-400")}>Foto</button>
+                              <button onClick={() => setMediaTab({...mediaTab, [item.id]: "video"})} className={"px-2.5 py-1 rounded-lg text-[10px] font-bold " + (mode === "video" ? "bg-orange-600 text-white" : "text-stone-400")}>Video 360°</button>
+                            </div>
+                          ) : (
+                            <button
+                              onClick={() => setZoomItem(item)}
+                              className="px-2.5 py-1 rounded-xl text-[10px] font-bold bg-stone-900 text-stone-300 hover:text-white border border-stone-700"
+                            >
+                              🔍 Ampliar Foto
+                            </button>
+                          )}
                         </div>
                         <div className="my-auto h-44 flex items-center justify-center overflow-hidden">
                           {mode === "photo" ? (
-                            getMediaSrc(item.id, "photo", item.photoRef) ? (
+                            photoSrc ? (
                               <img
-                                src={getMediaSrc(item.id, "photo", item.photoRef)}
+                                src={photoSrc}
                                 alt={item.name}
                                 onClick={() => setZoomItem(item)}
                                 onError={() => handleMediaError(item.id, "photo")}
@@ -724,15 +1097,14 @@
                               />
                             ) : (
                               <div className="text-center p-3 bg-stone-900/90 rounded-2xl border border-stone-800 max-w-xs">
-                                <p className="text-xs font-extrabold text-amber-400">📸 Falta subir archivo a GitHub:</p>
+                                <p className="text-xs font-extrabold text-amber-400">📸 Falta subir archivo:</p>
                                 <p className="text-[11px] font-mono text-stone-300 mt-1 break-all">{item.photoRef}</p>
-                                <p className="text-[10px] text-stone-400 mt-1">Sube la carpeta <strong>drop1</strong> (o las fotos sueltas) junto a index.html en tu repositorio de GitHub.</p>
                               </div>
                             )
                           ) : (
-                            getMediaSrc(item.id, "video", item.videoRef) ? (
+                            videoSrc ? (
                               <video
-                                src={getMediaSrc(item.id, "video", item.videoRef)}
+                                src={videoSrc}
                                 controls
                                 autoPlay
                                 muted
@@ -743,23 +1115,22 @@
                               />
                             ) : (
                               <div className="text-center p-3 bg-stone-900/90 rounded-2xl border border-stone-800 max-w-xs">
-                                <p className="text-xs font-extrabold text-amber-400">🎥 Falta subir video a GitHub:</p>
+                                <p className="text-xs font-extrabold text-amber-400">🎥 Falta subir video:</p>
                                 <p className="text-[11px] font-mono text-stone-300 mt-1 break-all">{item.videoRef}</p>
-                                <p className="text-[10px] text-stone-400 mt-1">Arrastra los videos .mp4 a tu repositorio en GitHub y haz clic en Commit changes.</p>
                               </div>
                             )
                           )}
                         </div>
                         <div className="flex justify-between text-[10px] text-stone-400 pt-1 border-t border-stone-800">
                           <span>Ref: {item.code}</span>
-                          <span>Entrega en {city.name} ({city.partnerName})</span>
+                          <span>Entrega en {city.name}</span>
                         </div>
                       </div>
                       <div className="p-5 space-y-4">
                         <div>
                           <div className="flex justify-between text-xs text-orange-400 font-bold">
                             <span>{item.brand}</span>
-                            <span className="text-stone-300 text-[10px] bg-stone-800 px-2 py-0.5 rounded">Spec: Full Set</span>
+                            <span className="text-stone-300 text-[10px] bg-stone-800 px-2 py-0.5 rounded">Spec: {item.qualitySpec}</span>
                           </div>
                           <h3 className="text-lg font-extrabold text-white mt-1">{item.name}</h3>
                           <p className="text-xs text-stone-400 mt-1">{item.colorway}</p>
@@ -774,8 +1145,8 @@
                             </div>
                           </div>
                           <div className="mt-3 pt-2 border-t border-stone-800 flex justify-between text-[11px] text-stone-300">
-                            <span>📦 Incluye: <strong>Full Set</strong></span>
-                            <span>📦 Caja + Cubrepolvo + Bag</span>
+                            <span>📦 Incluye: <strong>{item.qualitySpec}</strong></span>
+                            <span>📦 {item.packagingSpec}</span>
                           </div>
                         </div>
                         <div className="space-y-1.5">
@@ -798,15 +1169,15 @@
                         <div className="bg-stone-950 rounded-2xl p-3.5 border border-stone-800 flex justify-between items-center">
                           <div>
                             <span className="text-[10px] uppercase font-bold text-orange-400 block">Apartas Hoy</span>
-                            <span className="text-2xl font-black text-white">$1,500</span>
+                            <span className="text-2xl font-black text-white">{formatMXN(itemDrop.depositPrice)}</span>
                             {isPartnerMode && (
-                              <span className="block text-[10px] font-bold text-amber-400 mt-0.5">Socio: {formatMXN(PRICING_RULES.wholesalePrice)}</span>
+                              <span className="block text-[10px] font-bold text-amber-400 mt-0.5">Socio: {formatMXN(itemDrop.wholesalePrice)}</span>
                             )}
                           </div>
                           <div className="text-right">
                             <span className="text-[10px] uppercase font-bold text-emerald-400 block">Al Recibir en {city.name}</span>
-                            <span className="text-lg font-extrabold text-emerald-400">+ $1,200</span>
-                            <span className="block text-[10px] text-stone-400">Total: $2,700 MXN</span>
+                            <span className="text-lg font-extrabold text-emerald-400">+ {formatMXN(itemDrop.remainingPrice)}</span>
+                            <span className="block text-[10px] text-stone-400">Total: {formatMXN(itemDrop.totalPublicPrice)} MXN</span>
                           </div>
                         </div>
                       </div>
@@ -816,58 +1187,59 @@
                         onClick={() => setModalItem(item)}
                         className="w-full py-3 rounded-2xl font-extrabold text-sm bg-gradient-to-r from-orange-600 to-amber-600 text-white shadow-lg"
                       >
-                        Apartar Talla {sz} con {city.partnerName} ({city.name}) →
+                        Apartar Talla {sz} en {city.name} →
                       </button>
                     </div>
                   </div>
                 );
               })}
             </div>
-            {/* Teaser Próximo Drop: Air Max 90 */}
-            <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-stone-900 via-stone-900 to-amber-950/30 border border-stone-800 p-6 sm:p-8 space-y-6">
+
+            {/* Banner Cross-Sell para cambiar al otro Drop en paralelo */}
+            <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-stone-900 via-stone-900 to-amber-950/30 border border-stone-800 p-6 sm:p-8 space-y-5">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <span className="px-3.5 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-black uppercase tracking-wider flex items-center gap-1.5 border border-amber-500/30">
                   <span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse"></span>
-                  Próximo Lanzamiento • Drop #02
+                  Ambos Drops Activos en Paralelo
                 </span>
-                <span className="text-xs text-stone-400 font-bold">Llegada Próxima a Sonora</span>
+                <span className="text-xs text-stone-400 font-bold">Entregas en Hermosillo, Caborca, SLRC, Cananea y Huachinera</span>
               </div>
 
-              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-                <div className="space-y-3 max-w-2xl">
-                  <h3 className="text-2xl sm:text-3xl font-black text-white">
-                    Nike Air Max 90 <span className="text-orange-500">Edition</span>
-                  </h3>
-                  <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
-                    Expandimos el catálogo con una de las siluetas más icónicas de la cultura sneaker. Nuevos colorways clásicos y urbanos con amortiguación Air visible y calidad premium.
-                  </p>
-                  <div className="flex flex-wrap gap-2 pt-1 text-xs">
-                    <span className="bg-stone-950 px-3 py-1.5 rounded-xl border border-stone-800 text-stone-300 font-bold">
-                      📦 Empaque completo &amp; accesorios
-                    </span>
-                    <span className="bg-stone-950 px-3 py-1.5 rounded-xl border border-stone-800 text-stone-300 font-bold">
-                      🔒 Mismo esquema: Apartado + Contra entrega
-                    </span>
-                    <span className="bg-stone-950 px-3 py-1.5 rounded-xl border border-stone-800 text-stone-300 font-bold">
-                      ⚡ Cupos limitados por batch
-                    </span>
+              {activeDrop === "drop2" ? (
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                  <div className="space-y-2 max-w-2xl">
+                    <h3 className="text-2xl sm:text-3xl font-black text-white">
+                      ¿Buscas <span className="text-orange-500">Golden Goose Full Set</span>? El Drop #01 sigue activo
+                    </h3>
+                    <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
+                      Explora las 11 siluetas Super-Star y Ball Star con caja, cubrepolvo, shopping bag y pasaporte. Apartas con $1,500 MXN y liquidas $1,200 MXN al recibir en mano.
+                    </p>
                   </div>
-                </div>
-
-                <div className="bg-stone-950 p-5 rounded-2xl border border-stone-800 space-y-3 lg:max-w-xs w-full">
-                  <div>
-                    <span className="text-[10px] uppercase font-bold text-amber-400 block tracking-wider">Lista de Espera VIP</span>
-                    <p className="text-xs text-stone-300 font-bold mt-0.5">Sé de los primeros en elegir silueta y talla antes del sold-out.</p>
-                  </div>
-                  <a
-                    href={"https://wa.me/" + city.whatsapp + "?text=" + encodeURIComponent("Hola " + city.partnerName + " de SneakerHype " + city.name + "! Quiero anotarme en la lista VIP para tener acceso prioritario en cuanto abran los slots del Drop #02 de Nike Air Max 90.")}
-                    target="_blank"
-                    className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl font-black text-xs bg-amber-500 hover:bg-amber-400 text-stone-950 transition shadow-lg shadow-amber-950/40"
+                  <button
+                    onClick={() => { handleSelectDrop("drop1"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                    className="py-3.5 px-6 rounded-2xl font-black text-xs sm:text-sm bg-orange-600 hover:bg-orange-500 text-white transition shadow-lg shrink-0"
                   >
-                    <span>💬 Acceso Prioritario con {city.partnerName}</span>
-                  </a>
+                    Ver Catálogo Drop #01 • Golden Goose →
+                  </button>
                 </div>
-              </div>
+              ) : (
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                  <div className="space-y-2 max-w-2xl">
+                    <h3 className="text-2xl sm:text-3xl font-black text-white">
+                      ¡Nuevo <span className="text-orange-500">Drop #02: Nike Air Max 90</span> ya disponible!
+                    </h3>
+                    <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
+                      11 colorways clásicos y ediciones especiales (Día de Muertos, Lucha Libre, Triple Black Cordura®, Desert Wheat y más). Apartas con $1,200 MXN y liquidas solo $700 MXN al recibir (Total $1,900 MXN).
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => { handleSelectDrop("drop2"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                    className="py-3.5 px-6 rounded-2xl font-black text-xs sm:text-sm bg-amber-500 hover:bg-amber-400 text-stone-950 transition shadow-lg shrink-0"
+                  >
+                    Ver Catálogo Drop #02 • Air Max 90 →
+                  </button>
+                </div>
+              )}
             </section>
 
             <section className="rounded-3xl bg-stone-900/70 border border-stone-800 p-6 sm:p-8 space-y-5">
@@ -878,15 +1250,21 @@
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
                 <div className="bg-stone-950 p-4 rounded-2xl border border-stone-800 space-y-1.5">
                   <span className="text-orange-400 font-black text-sm">1. Aparta tu slot de importación</span>
-                  <p className="text-stone-400 leading-relaxed">Eliges modelo, talla y ciudad. Aseguras tu lugar en el batch con el anticipo correspondiente (en Drop #01: $1,500 MXN).</p>
+                  <p className="text-stone-400 leading-relaxed">
+                    Eliges modelo, talla y ciudad. Aseguras tu lugar con el anticipo del drop (<strong>$1,200 MXN</strong> en Air Max 90 o <strong>$1,500 MXN</strong> en Golden Goose).
+                  </p>
                 </div>
                 <div className="bg-stone-950 p-4 rounded-2xl border border-stone-800 space-y-1.5">
-                  <span className="text-amber-300 font-black text-sm">2. Full Set garantizado</span>
-                  <p className="text-stone-400 leading-relaxed">Cada par se importa con sus especificaciones completas (caja, cubrepolvo y accesorios).</p>
+                  <span className="text-amber-300 font-black text-sm">2. Empaque completo garantizado</span>
+                  <p className="text-stone-400 leading-relaxed">
+                    Cada par se importa con su caja original (y Full Set completo con cubrepolvo y shopping bag en Golden Goose).
+                  </p>
                 </div>
                 <div className="bg-stone-950 p-4 rounded-2xl border border-stone-800 space-y-1.5">
                   <span className="text-emerald-400 font-black text-sm">3. Liquidas al recibir en mano</span>
-                  <p className="text-stone-400 leading-relaxed">Pagas el saldo restante únicamente cuando tengas físicamente tu par en mano en Hermosillo o tu municipio aliado. Cero riesgo.</p>
+                  <p className="text-stone-400 leading-relaxed">
+                    Pagas el saldo restante (<strong>$700 MXN</strong> en Air Max 90 o <strong>$1,200 MXN</strong> en Golden Goose) únicamente al recibir tu par físicamente en Sonora. Cero riesgo.
+                  </p>
                 </div>
               </div>
             </section>
@@ -933,26 +1311,28 @@
               </footer>
             </section>
           </main>
+
           {/* Botón flotante de WhatsApp para atención rápida */}
           <aside className="fixed bottom-5 right-5 z-40">
             <a
-              href={"https://wa.me/" + city.whatsapp + "?text=" + encodeURIComponent("Hola " + city.partnerName + " de SneakerHype " + city.name + "! Tengo una duda sobre el Drop #01 de Golden Goose.")}
+              href={"https://wa.me/" + city.whatsapp + "?text=" + encodeURIComponent(`Hola SneakerHype ${city.name}! Tengo una duda sobre el ${currentDropConfig.fullName}.`)}
               target="_blank"
               className="group flex items-center gap-2.5 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-3 rounded-full shadow-2xl shadow-emerald-950/80 border border-emerald-400/40 transition-all hover:scale-105"
-              title={"Atención directa por WhatsApp con " + city.partnerName + " en " + city.name}
+              title={"Atención directa por WhatsApp en " + city.name}
             >
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
               </span>
               <span className="text-xs font-black tracking-wide hidden sm:inline">
-                WhatsApp {city.name} • {city.partnerName}
+                WhatsApp {city.name}
               </span>
               <span className="text-xs font-black tracking-wide sm:hidden">
-                WhatsApp {city.partnerName}
+                WhatsApp
               </span>
             </a>
           </aside>
+
           {zoomItem && (
             <div onClick={() => setZoomItem(null)} className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 cursor-zoom-out">
               <div onClick={e => e.stopPropagation()} className="relative max-w-2xl w-full bg-stone-900 border border-stone-700 rounded-3xl p-4 space-y-3 cursor-default">
@@ -966,7 +1346,7 @@
                 </div>
                 <div className="bg-stone-950 rounded-2xl p-2 flex items-center justify-center">
                   <img
-                    src={getMediaSrc(zoomItem.id, "photo", zoomItem.photoRef)}
+                    src={getMediaSrc(zoomItem.id, "photo", zoomItem.photoRef, zoomItem.folder)}
                     alt={zoomItem.name}
                     className="max-h-[70vh] w-auto object-contain rounded-xl"
                   />
@@ -974,6 +1354,7 @@
               </div>
             </div>
           )}
+
           {showPinModal && (
             <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
               <form onSubmit={handlePinSubmit} className="bg-stone-900 border border-stone-700 rounded-3xl max-w-sm w-full p-6 space-y-4">
@@ -984,7 +1365,7 @@
                   </div>
                   <button type="button" onClick={() => { setShowPinModal(false); setPinError(""); setPinInput(""); }} className="px-2.5 py-1 rounded-lg bg-stone-800 text-stone-300">✕</button>
                 </div>
-                <p className="text-xs text-stone-400">Ingresa el PIN de 6 dígitos para ver precios mayoreo y la calculadora de ganancias.</p>
+                <p className="text-xs text-stone-400">Ingresa el PIN de 6 dígitos para ver precios mayoreo y la calculadora de ganancias de ambos drops.</p>
                 <input
                   type="password"
                   inputMode="numeric"
@@ -1002,6 +1383,7 @@
               </form>
             </div>
           )}
+
           {modalItem && (
             <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
               <div className="bg-stone-900 border border-stone-700 rounded-3xl max-w-lg w-full p-6 space-y-4">
@@ -1009,7 +1391,7 @@
                   <div>
                     <span className="text-xs font-bold text-orange-400">SneakerHype HMO • {modalItem.code}</span>
                     <h3 className="text-lg font-black text-white">{modalItem.name}</h3>
-                    <p className="text-xs text-stone-400">Full Set</p>
+                    <p className="text-xs text-stone-400">{modalItem.qualitySpec} ({modalItem.packagingSpec})</p>
                   </div>
                   <button onClick={() => setModalItem(null)} className="px-2.5 py-1 rounded-lg bg-stone-800 text-stone-300">✕</button>
                 </div>
@@ -1023,9 +1405,8 @@
                 <div className="bg-stone-950 rounded-2xl p-4 border border-stone-800 space-y-1.5 text-xs">
                   <div className="flex justify-between"><span>Talla seleccionada:</span><strong className="text-orange-400">{getSize(modalItem.id)}</strong></div>
                   <div className="flex justify-between"><span>Ciudad de entrega:</span><strong className="text-white">{city.name} ({city.deliverySpot})</strong></div>
-                  <div className="flex justify-between"><span>Socio / Atención directa:</span><strong className="text-amber-300">{city.partnerName} ({city.phoneDisplay})</strong></div>
-                  <div className="flex justify-between text-orange-400 font-bold"><span>Apartado Hoy:</span><span>$1,500 MXN</span></div>
-                  <div className="flex justify-between text-emerald-400 font-bold"><span>Liquidación al recibir:</span><span>$1,200 MXN (Total $2,700)</span></div>
+                  <div className="flex justify-between text-orange-400 font-bold"><span>Apartado Hoy:</span><span>{formatMXN(modalDropConfig.depositPrice)} MXN</span></div>
+                  <div className="flex justify-between text-emerald-400 font-bold"><span>Liquidación al recibir:</span><span>{formatMXN(modalDropConfig.remainingPrice)} MXN (Total {formatMXN(modalDropConfig.totalPublicPrice)})</span></div>
                 </div>
                 <div className="bg-stone-950/80 rounded-2xl p-3 border border-stone-800 text-[11px] text-stone-300 space-y-1">
                   <div className="flex items-center gap-1.5 font-bold text-amber-400">
@@ -1033,15 +1414,15 @@
                     <span>Método de Apartado Seguro:</span>
                   </div>
                   <p className="text-stone-400 leading-relaxed">
-                    Al hacer clic abajo se abrirá tu WhatsApp con {city.partnerName} ({city.name}). Te compartirá los datos de transferencia bancaria (SPEI / Oxxo) para apartar tu par con $1,500 MXN y entregarte personalmente.
+                    Al hacer clic abajo se abrirá tu WhatsApp con tu orden lista. Te compartiremos los datos de transferencia bancaria (SPEI / Oxxo) para apartar tu par con {formatMXN(modalDropConfig.depositPrice)} MXN y liquidar los {formatMXN(modalDropConfig.remainingPrice)} MXN restantes en mano al recibir.
                   </p>
                 </div>
                 <a
-                  href={"https://wa.me/" + city.whatsapp + "?text=" + encodeURIComponent("Hola " + city.partnerName + " de SneakerHype " + city.name + "! " + (clientName ? "Soy " + clientName + ". " : "") + "Quiero apartar el modelo *" + modalItem.name + "* (" + modalItem.code + " • Full Set) en talla *" + getSize(modalItem.id) + "* para entrega en *" + city.name + "* (" + city.deliverySpot + "). Apartado hoy: $1,500 MXN | Restante al recibir: $1,200 MXN.")}
+                  href={"https://wa.me/" + city.whatsapp + "?text=" + encodeURIComponent("Hola SneakerHype HMO! " + (clientName ? "Soy " + clientName + ". " : "") + "Quiero apartar el modelo *" + modalItem.name + "* (" + modalItem.code + " • " + modalItem.qualitySpec + ") en talla *" + getSize(modalItem.id) + "* para entrega en *" + city.name + "* (" + city.deliverySpot + "). Apartado hoy: " + formatMXN(modalDropConfig.depositPrice) + " MXN | Restante al recibir: " + formatMXN(modalDropConfig.remainingPrice) + " MXN (Total " + formatMXN(modalDropConfig.totalPublicPrice) + " MXN).")}
                   target="_blank"
                   className="block w-full text-center py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm shadow-lg shadow-emerald-900/30"
                 >
-                  Enviar Apartado por WhatsApp con {city.partnerName} ({city.name} • {city.phoneDisplay})
+                  Enviar Apartado por WhatsApp a {city.name} ({city.phoneDisplay})
                 </a>
               </div>
             </div>
