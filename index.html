@@ -14,13 +14,19 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body class="bg-stone-950 text-stone-100 font-sans selection:bg-orange-500 selection:text-white">
   <div id="root"></div>
   <script type="text/babel">
     const { useState, useMemo, useEffect } = React;
-    const PARTNER_PIN = "402040";
+    // SHA-256 de "sneakerhype-hmo:" + PIN. Para cambiarlo:
+    // printf '%s' 'sneakerhype-hmo:NUEVOPIN' | shasum -a 256
+    const PARTNER_PIN_HASH = "11deac8400ca305e61c3ff01349b9a48e98ae910612a9fb9b80e25efe786b718";
+    const sha256Hex = async (text) => {
+      const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
+    };
     const PRICING_RULES = {
       depositPrice: 1500,
       remainingPrice: 1200,
@@ -35,8 +41,8 @@
         a: "Lanzamos periódicamente drops de las siluetas más cotizadas del streetwear internacional (Golden Goose, Nike Air Max 90, etc.) en batches o cupos limitados. Cada par se importa sobre pedido: apartas con un monto base para asegurar tu slot de importación y liquidas el resto en mano únicamente cuando recibes tu par en Sonora."
       },
       {
-        q: "¿Qué calidad son los sneakers y qué incluye el Full Set?",
-        a: "Trabajamos con el estándar más alto del mercado (G5 Master Edition 1:1, elaborado con pieles genuinas, gamuzas finas y acabados idénticos de boutique). En modelos de lujo como Golden Goose incluye caja original, cubrepolvo de tela (dust bag), shopping bag y pasaporte/certificados QR."
+        q: "¿Qué incluye el Full Set?",
+        a: "Cada par se entrega con su caja, cubrepolvo de tela (dust bag) y shopping bag. Antes de apartar te compartimos fotos y video del par para que veas exactamente lo que recibes."
       },
       {
         q: "¿Cuánto tiempo tarda en llegar mi pedido a Sonora?",
@@ -52,7 +58,7 @@
       },
       {
         q: "¿Realizan entregas en otros municipios de Sonora?",
-        a: "Contamos con presencia física y socios directos en Hermosillo, Caborca, San Luis Río Colorado, Cananea y Huachinera. Si estás en otra localidad de Sonora, coordinamos el envío seguro directo hasta tu puerta."
+        a: "Contamos con presencia física y socios directos en Hermosillo (Carlos y Julio), Caborca (José), San Luis Río Colorado (Omar), Cananea (Germán) y Huachinera (Brayan). Si estás en otra localidad de Sonora, coordinamos el envío seguro directo hasta tu puerta."
       }
     ];
     const DROPS = [
@@ -61,8 +67,8 @@
     "code": "SH-GG-01",
     "name": "Golden Goose Super-Star \"Grey Star & White Luce Heel\"",
     "brand": "Golden Goose Deluxe Brand",
-    "qualitySpec": "G5 Master Edition • Full Set",
-    "packagingSpec": "Caja Original, Shopping Bag, Cubrepolvo & Pasaporte",
+    "qualitySpec": "Full Set",
+    "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
     "colorway": "Piel Blanca / Estrella Gamuza Gris / Talón Blanco Nacarado",
     "photoRef": "PHOTO-2026-11-09-06-38-50.jpg",
     "videoRef": "VIDEO-2026-11-09-06-39-00.mp4",
@@ -79,8 +85,8 @@
     "code": "SH-GG-02",
     "name": "Golden Goose Ball Star \"Tan Suede / Desert Camel\"",
     "brand": "Golden Goose Deluxe Brand",
-    "qualitySpec": "G5 Master Edition • Full Set",
-    "packagingSpec": "Caja Original, Shopping Bag, Cubrepolvo & Pasaporte",
+    "qualitySpec": "Full Set",
+    "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
     "colorway": "Gamuza Camel Desierto / Piel Blanca / Estrella Tono Arena",
     "photoRef": "PHOTO-2026-11-09-06-39-01.jpg",
     "videoRef": "VIDEO-2026-11-09-06-39-23.mp4",
@@ -97,8 +103,8 @@
     "code": "SH-GG-03",
     "name": "Golden Goose Ball Star \"Forest Green / Journey of Love\"",
     "brand": "Golden Goose Deluxe Brand",
-    "qualitySpec": "G5 Master Edition • Full Set",
-    "packagingSpec": "Caja Original, Shopping Bag, Cubrepolvo & Pasaporte",
+    "qualitySpec": "Full Set",
+    "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
     "colorway": "Piel Blanca / Estrella & Talón Verde Bosque / \"Journey of Love\"",
     "photoRef": "PHOTO-2026-11-09-06-39-26.jpg",
     "videoRef": "VIDEO-2026-11-09-06-39-42.mp4",
@@ -115,8 +121,8 @@
     "code": "SH-GG-04",
     "name": "Golden Goose Ball Star \"Sherpa & Grey Star / Dreamed in Venice\"",
     "brand": "Golden Goose Deluxe Brand",
-    "qualitySpec": "G5 Master Edition • Full Set",
-    "packagingSpec": "Caja Original, Shopping Bag, Cubrepolvo & Pasaporte",
+    "qualitySpec": "Full Set",
+    "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
     "colorway": "Cuello Borrega Crema / Estrella Gris / Inscripción \"Dreamed in Venice\"",
     "photoRef": "PHOTO-2026-11-09-06-39-45.jpg",
     "videoRef": "VIDEO-2026-11-09-06-40-05.mp4",
@@ -133,8 +139,8 @@
     "code": "SH-GG-05",
     "name": "Golden Goose Ball Star \"Navy Star / Gold Heel & Red Accent\"",
     "brand": "Golden Goose Deluxe Brand",
-    "qualitySpec": "G5 Master Edition • Full Set",
-    "packagingSpec": "Caja Original, Shopping Bag, Cubrepolvo & Pasaporte",
+    "qualitySpec": "Full Set",
+    "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
     "colorway": "Estrella Gamuza Azul Marino / Talón Dorado / Acento Rojo",
     "photoRef": "PHOTO-2026-11-09-06-40-07.jpg",
     "videoRef": "VIDEO-2026-11-09-06-40-25.mp4",
@@ -151,8 +157,8 @@
     "code": "SH-GG-06",
     "name": "Golden Goose Super-Star \"Black Heel & Classic Star\"",
     "brand": "Golden Goose Deluxe Brand",
-    "qualitySpec": "G5 Master Edition • Full Set",
-    "packagingSpec": "Caja Original, Shopping Bag, Cubrepolvo & Pasaporte",
+    "qualitySpec": "Full Set",
+    "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
     "colorway": "Piel Blanca / Talón Negro Contraste / Estrella Gamuza Gris",
     "photoRef": "PHOTO-2026-11-09-06-40-27.jpg",
     "videoRef": "VIDEO-2026-11-09-06-41-33.mp4",
@@ -169,8 +175,8 @@
     "code": "SH-GG-07",
     "name": "Golden Goose Super-Star \"Silver Star / Blue Heel & VSA Is For Lovers\"",
     "brand": "Golden Goose Deluxe Brand",
-    "qualitySpec": "G5 Master Edition • Full Set",
-    "packagingSpec": "Caja Original, Shopping Bag, Cubrepolvo & Pasaporte",
+    "qualitySpec": "Full Set",
+    "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
     "colorway": "Piel Crema / Estrella Plateada / Talón Azul Rey / Agujetas Logo Negras",
     "photoRef": "PHOTO-2026-11-09-06-41-36.jpg",
     "videoRef": "VIDEO-2026-11-09-06-41-51.mp4",
@@ -187,8 +193,8 @@
     "code": "SH-GG-08",
     "name": "Golden Goose Ball Star \"Cracked Leather / Black Star & Gum Sole\"",
     "brand": "Golden Goose Deluxe Brand",
-    "qualitySpec": "G5 Master Edition • Full Set",
-    "packagingSpec": "Caja Original, Shopping Bag, Cubrepolvo & Pasaporte",
+    "qualitySpec": "Full Set",
+    "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
     "colorway": "Piel Blanca / Puntera Craquelada / Estrella Negra / Suela Vintage Ámbar",
     "photoRef": "PHOTO-2026-11-09-06-41-54.jpg",
     "videoRef": "VIDEO-2026-11-09-06-42-02.mp4",
@@ -205,8 +211,8 @@
     "code": "SH-GG-09",
     "name": "Golden Goose Super-Star \"Black Glitter Heel & Metallic Star\"",
     "brand": "Golden Goose Deluxe Brand",
-    "qualitySpec": "G5 Master Edition • Full Set",
-    "packagingSpec": "Caja Original, Shopping Bag, Cubrepolvo & Pasaporte",
+    "qualitySpec": "Full Set",
+    "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
     "colorway": "Piel Blanco Hueso / Estrella Metálica / Talón Glitter Negro / Agujetas Grises",
     "photoRef": "PHOTO-2026-11-09-06-42-08.jpg",
     "videoRef": "VIDEO-2026-11-09-06-42-24.mp4",
@@ -223,8 +229,8 @@
     "code": "SH-GG-10",
     "name": "Golden Goose Ball Star \"Grey Suede Toe / Black Star & Cream Laces\"",
     "brand": "Golden Goose Deluxe Brand",
-    "qualitySpec": "G5 Master Edition • Full Set",
-    "packagingSpec": "Caja Original, Shopping Bag, Cubrepolvo & Pasaporte",
+    "qualitySpec": "Full Set",
+    "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
     "colorway": "Piel Blanca Lisa / Puntera Gamuza Gris / Estrella Negra / Suela Vintage",
     "photoRef": "PHOTO-2026-11-09-06-42-30.jpg",
     "videoRef": "VIDEO-2026-11-09-06-42-45.mp4",
@@ -241,8 +247,8 @@
     "code": "SH-GG-11",
     "name": "Golden Goose Super-Star \"Rose Glitter Heel & Taupe Star\"",
     "brand": "Golden Goose Deluxe Brand",
-    "qualitySpec": "G5 Master Edition • Full Set",
-    "packagingSpec": "Caja Original, Shopping Bag, Cubrepolvo & Pasaporte",
+    "qualitySpec": "Full Set",
+    "packagingSpec": "Caja, Shopping Bag & Cubrepolvo",
     "colorway": "Piel Blanco Hueso / Estrella Taupe / Puntera Gamuza Gris / Talón Glitter Rosa",
     "photoRef": "PHOTO-2026-11-09-06-42-46.jpg",
     "videoRef": "VIDEO-2026-11-09-06-43-22.mp4",
@@ -260,6 +266,7 @@
   {
     "id": "hmo",
     "name": "Hermosillo",
+    "partnerName": "Carlos",
     "role": "Hub Central & Entregas Personales",
     "phoneDisplay": "662 386 1533",
     "whatsapp": "526623861533",
@@ -270,8 +277,22 @@
     ]
   },
   {
+    "id": "hmo-julio",
+    "name": "Hermosillo",
+    "partnerName": "Julio",
+    "role": "Socio Hermosillo Activo",
+    "phoneDisplay": "662 432 4212",
+    "whatsapp": "526624324212",
+    "deliverySpot": "Plaza Zaragoza o servicio a domicilio",
+    "deliveryOptions": [
+      "Punto de entrega: Plaza Zaragoza",
+      "Servicio a domicilio en Hermosillo"
+    ]
+  },
+  {
     "id": "cab",
     "name": "Caborca",
+    "partnerName": "José",
     "role": "Socio Regional Activo",
     "phoneDisplay": "637 378 0424",
     "whatsapp": "526373780424",
@@ -283,6 +304,7 @@
   {
     "id": "slrc",
     "name": "San Luis Río Colorado",
+    "partnerName": "Omar",
     "role": "Socio Frontera Activo",
     "phoneDisplay": "653 160 4404",
     "whatsapp": "526531604404",
@@ -295,6 +317,7 @@
   {
     "id": "can",
     "name": "Cananea",
+    "partnerName": "Germán",
     "role": "Socio Sierra / Minera",
     "phoneDisplay": "645 113 5478",
     "whatsapp": "526451135478",
@@ -307,6 +330,7 @@
   {
     "id": "hua",
     "name": "Huachinera",
+    "partnerName": "Brayan",
     "role": "Socio Sierra Alta",
     "phoneDisplay": "633 132 0733",
     "whatsapp": "526331320733",
@@ -329,7 +353,7 @@
       const [showPinModal, setShowPinModal] = useState(false);
       const [pinInput, setPinInput] = useState("");
       const [pinError, setPinError] = useState("");
-      const [partnerCity, setPartnerCity] = useState("Caborca");
+      const [partnerCity, setPartnerCity] = useState("Hermosillo (Julio)");
       const [partnerWeeklyPairs, setPartnerWeeklyPairs] = useState(4);
       const [partnerSalePrice, setPartnerSalePrice] = useState(2700);
       const [silhouetteFilter, setSilhouetteFilter] = useState("all");
@@ -364,7 +388,7 @@
       }, []);
 
       const handleShareCatalog = async () => {
-        const shareText = `¡Checa el Drop #01 de Golden Goose en SneakerHype Sonora! 🔥 Calidad G5 Full Set, apartas con $1,500 y liquidas al recibir en tu ciudad (${city.name}).`;
+        const shareText = `¡Checa el Drop #01 de Golden Goose en SneakerHype Sonora! 🔥 Full Set, apartas con $1,500 y liquidas al recibir en tu ciudad (${city.name} con ${city.partnerName}).`;
         const shareUrl = window.location.href;
 
         if (navigator.share) {
@@ -407,9 +431,10 @@
         };
       }, [partnerWeeklyPairs, partnerSalePrice]);
 
-      const handlePinSubmit = (e) => {
+      const handlePinSubmit = async (e) => {
         e.preventDefault();
-        if (pinInput.trim() === PARTNER_PIN) {
+        const hash = await sha256Hex("sneakerhype-hmo:" + pinInput.trim());
+        if (hash === PARTNER_PIN_HASH) {
           setIsPartnerMode(true);
           setShowPinModal(false);
           setPinInput("");
@@ -492,7 +517,7 @@
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <span className="px-3 py-1 rounded-full bg-orange-500/20 text-orange-300 text-xs font-bold flex items-center gap-1.5">
                   <span className="h-2 w-2 rounded-full bg-orange-400 animate-pulse"></span>
-                  DROP #01 ACTIVO • Golden Goose G5 Master (Full Set)
+                  DROP #01 ACTIVO • Golden Goose (Full Set)
                 </span>
                 <div className="flex items-center gap-2 bg-stone-950/90 border border-amber-500/30 px-3.5 py-1.5 rounded-2xl">
                   <span className="relative flex h-2.5 w-2.5">
@@ -518,33 +543,38 @@
                 </p>
               </div>
 
-              <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-                <div className="flex flex-wrap gap-2">
-                  {CITIES.map(c => (
-                    <button
-                      key={c.id}
-                      onClick={() => setCity(c)}
-                      className={"px-4 py-2 rounded-xl text-xs font-bold border transition " + (city.id === c.id ? "bg-orange-600 text-white border-orange-400 shadow-lg shadow-orange-600/20" : "bg-stone-900 text-stone-400 border-stone-800 hover:border-stone-700")}
-                    >
-                      📍 {c.name} ({c.phoneDisplay})
-                    </button>
-                  ))}
-                </div>
+              <div className="space-y-2.5 pt-1">
+                <p className="text-xs font-bold text-stone-400 uppercase tracking-wider">
+                  Selecciona tu ciudad y socio oficial para entrega personal:
+                </p>
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <div className="flex flex-wrap gap-2">
+                    {CITIES.map(c => (
+                      <button
+                        key={c.id}
+                        onClick={() => setCity(c)}
+                        className={"px-4 py-2 rounded-xl text-xs font-bold border transition " + (city.id === c.id ? "bg-orange-600 text-white border-orange-400 shadow-lg shadow-orange-600/20" : "bg-stone-900 text-stone-400 border-stone-800 hover:border-stone-700")}
+                      >
+                        📍 {c.name} • {c.partnerName} ({c.phoneDisplay})
+                      </button>
+                    ))}
+                  </div>
 
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={handleShareCatalog}
-                    className="px-3.5 py-2 rounded-xl bg-stone-950 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-700 text-xs font-bold transition flex items-center gap-1.5"
-                  >
-                    <span>{copiedLink ? "✓ Enlace copiado" : "🔗 Copiar link"}</span>
-                  </button>
-                  <a
-                    href={"https://wa.me/?text=" + encodeURIComponent("¡Checa el Drop #01 de Golden Goose en SneakerHype Sonora! 🔥 Calidad G5 Full Set, apartas con $1,500 MXN y liquidas al recibir en tu ciudad (" + city.name + "): " + (typeof window !== "undefined" ? window.location.href : ""))}
-                    target="_blank"
-                    className="px-3.5 py-2 rounded-xl bg-emerald-600/90 hover:bg-emerald-500 text-white text-xs font-black transition flex items-center gap-1.5 shadow"
-                  >
-                    <span>💬 Enviar por WhatsApp</span>
-                  </a>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={handleShareCatalog}
+                      className="px-3.5 py-2 rounded-xl bg-stone-950 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-700 text-xs font-bold transition flex items-center gap-1.5"
+                    >
+                      <span>{copiedLink ? "✓ Enlace copiado" : "🔗 Copiar link"}</span>
+                    </button>
+                    <a
+                      href={"https://wa.me/?text=" + encodeURIComponent("¡Checa el Drop #01 de Golden Goose en SneakerHype Sonora! 🔥 Full Set, apartas con $1,500 MXN y liquidas al recibir en tu ciudad (" + city.name + " con " + city.partnerName + "): " + (typeof window !== "undefined" ? window.location.href : ""))}
+                      target="_blank"
+                      className="px-3.5 py-2 rounded-xl bg-emerald-600/90 hover:bg-emerald-500 text-white text-xs font-black transition flex items-center gap-1.5 shadow"
+                    >
+                      <span>💬 Enviar por WhatsApp</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -557,7 +587,7 @@
                     <p className="text-xs text-stone-400 mt-1">Simula tu utilidad semanal y mensual operando sin capital inicial (el apartado de $1,500 cubre el costo base).</p>
                   </div>
                   <div className="flex flex-wrap gap-1.5">
-                    {["Caborca", "San Luis Río Colorado", "Cananea", "Huachinera"].map(p => (
+                    {["Hermosillo (Julio)", "Caborca (José)", "San Luis Río Colorado (Omar)", "Cananea (Germán)", "Huachinera (Brayan)"].map(p => (
                       <button
                         key={p}
                         onClick={() => setPartnerCity(p)}
@@ -722,14 +752,14 @@
                         </div>
                         <div className="flex justify-between text-[10px] text-stone-400 pt-1 border-t border-stone-800">
                           <span>Ref: {item.code}</span>
-                          <span>Entrega en {city.name}</span>
+                          <span>Entrega en {city.name} ({city.partnerName})</span>
                         </div>
                       </div>
                       <div className="p-5 space-y-4">
                         <div>
                           <div className="flex justify-between text-xs text-orange-400 font-bold">
                             <span>{item.brand}</span>
-                            <span className="text-stone-300 text-[10px] bg-stone-800 px-2 py-0.5 rounded">Spec: G5 Full Set</span>
+                            <span className="text-stone-300 text-[10px] bg-stone-800 px-2 py-0.5 rounded">Spec: Full Set</span>
                           </div>
                           <h3 className="text-lg font-extrabold text-white mt-1">{item.name}</h3>
                           <p className="text-xs text-stone-400 mt-1">{item.colorway}</p>
@@ -744,7 +774,7 @@
                             </div>
                           </div>
                           <div className="mt-3 pt-2 border-t border-stone-800 flex justify-between text-[11px] text-stone-300">
-                            <span>🛡️ Calidad: <strong>G5 Master (1:1)</strong></span>
+                            <span>📦 Incluye: <strong>Full Set</strong></span>
                             <span>📦 Caja + Cubrepolvo + Bag</span>
                           </div>
                         </div>
@@ -786,7 +816,7 @@
                         onClick={() => setModalItem(item)}
                         className="w-full py-3 rounded-2xl font-extrabold text-sm bg-gradient-to-r from-orange-600 to-amber-600 text-white shadow-lg"
                       >
-                        Apartar Talla {sz} en {city.name} →
+                        Apartar Talla {sz} con {city.partnerName} ({city.name}) →
                       </button>
                     </div>
                   </div>
@@ -830,11 +860,11 @@
                     <p className="text-xs text-stone-300 font-bold mt-0.5">Sé de los primeros en elegir silueta y talla antes del sold-out.</p>
                   </div>
                   <a
-                    href={"https://wa.me/" + city.whatsapp + "?text=" + encodeURIComponent("Hola SneakerHype " + city.name + "! Quiero anotarme en la lista VIP para tener acceso prioritario en cuanto abran los slots del Drop #02 de Nike Air Max 90.")}
+                    href={"https://wa.me/" + city.whatsapp + "?text=" + encodeURIComponent("Hola " + city.partnerName + " de SneakerHype " + city.name + "! Quiero anotarme en la lista VIP para tener acceso prioritario en cuanto abran los slots del Drop #02 de Nike Air Max 90.")}
                     target="_blank"
                     className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl font-black text-xs bg-amber-500 hover:bg-amber-400 text-stone-950 transition shadow-lg shadow-amber-950/40"
                   >
-                    <span>💬 Acceso Prioritario Air Max 90</span>
+                    <span>💬 Acceso Prioritario con {city.partnerName}</span>
                   </a>
                 </div>
               </div>
@@ -851,8 +881,8 @@
                   <p className="text-stone-400 leading-relaxed">Eliges modelo, talla y ciudad. Aseguras tu lugar en el batch con el anticipo correspondiente (en Drop #01: $1,500 MXN).</p>
                 </div>
                 <div className="bg-stone-950 p-4 rounded-2xl border border-stone-800 space-y-1.5">
-                  <span className="text-amber-300 font-black text-sm">2. Calidad Master garantizada</span>
-                  <p className="text-stone-400 leading-relaxed">Cada par se importa con sus especificaciones completas (caja original, cubrepolvo, accesorios y máxima fidelidad de materiales).</p>
+                  <span className="text-amber-300 font-black text-sm">2. Full Set garantizado</span>
+                  <p className="text-stone-400 leading-relaxed">Cada par se importa con sus especificaciones completas (caja, cubrepolvo y accesorios).</p>
                 </div>
                 <div className="bg-stone-950 p-4 rounded-2xl border border-stone-800 space-y-1.5">
                   <span className="text-emerald-400 font-black text-sm">3. Liquidas al recibir en mano</span>
@@ -906,20 +936,20 @@
           {/* Botón flotante de WhatsApp para atención rápida */}
           <aside className="fixed bottom-5 right-5 z-40">
             <a
-              href={"https://wa.me/" + city.whatsapp + "?text=" + encodeURIComponent("Hola SneakerHype " + city.name + "! Tengo una duda sobre el Drop #01 de Golden Goose.")}
+              href={"https://wa.me/" + city.whatsapp + "?text=" + encodeURIComponent("Hola " + city.partnerName + " de SneakerHype " + city.name + "! Tengo una duda sobre el Drop #01 de Golden Goose.")}
               target="_blank"
               className="group flex items-center gap-2.5 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-3 rounded-full shadow-2xl shadow-emerald-950/80 border border-emerald-400/40 transition-all hover:scale-105"
-              title={"Atención directa por WhatsApp en " + city.name}
+              title={"Atención directa por WhatsApp con " + city.partnerName + " en " + city.name}
             >
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
               </span>
               <span className="text-xs font-black tracking-wide hidden sm:inline">
-                WhatsApp {city.name}
+                WhatsApp {city.name} • {city.partnerName}
               </span>
               <span className="text-xs font-black tracking-wide sm:hidden">
-                WhatsApp
+                WhatsApp {city.partnerName}
               </span>
             </a>
           </aside>
@@ -979,7 +1009,7 @@
                   <div>
                     <span className="text-xs font-bold text-orange-400">SneakerHype HMO • {modalItem.code}</span>
                     <h3 className="text-lg font-black text-white">{modalItem.name}</h3>
-                    <p className="text-xs text-stone-400">Calidad G5 Master (1:1 Full Set)</p>
+                    <p className="text-xs text-stone-400">Full Set</p>
                   </div>
                   <button onClick={() => setModalItem(null)} className="px-2.5 py-1 rounded-lg bg-stone-800 text-stone-300">✕</button>
                 </div>
@@ -993,6 +1023,7 @@
                 <div className="bg-stone-950 rounded-2xl p-4 border border-stone-800 space-y-1.5 text-xs">
                   <div className="flex justify-between"><span>Talla seleccionada:</span><strong className="text-orange-400">{getSize(modalItem.id)}</strong></div>
                   <div className="flex justify-between"><span>Ciudad de entrega:</span><strong className="text-white">{city.name} ({city.deliverySpot})</strong></div>
+                  <div className="flex justify-between"><span>Socio / Atención directa:</span><strong className="text-amber-300">{city.partnerName} ({city.phoneDisplay})</strong></div>
                   <div className="flex justify-between text-orange-400 font-bold"><span>Apartado Hoy:</span><span>$1,500 MXN</span></div>
                   <div className="flex justify-between text-emerald-400 font-bold"><span>Liquidación al recibir:</span><span>$1,200 MXN (Total $2,700)</span></div>
                 </div>
@@ -1002,15 +1033,15 @@
                     <span>Método de Apartado Seguro:</span>
                   </div>
                   <p className="text-stone-400 leading-relaxed">
-                    Al hacer clic abajo se abrirá tu WhatsApp con tu orden lista. Te compartiremos los datos de transferencia bancaria (SPEI / Oxxo) para apartar tu par con $1,500 MXN y entregarte personalmente.
+                    Al hacer clic abajo se abrirá tu WhatsApp con {city.partnerName} ({city.name}). Te compartirá los datos de transferencia bancaria (SPEI / Oxxo) para apartar tu par con $1,500 MXN y entregarte personalmente.
                   </p>
                 </div>
                 <a
-                  href={"https://wa.me/" + city.whatsapp + "?text=" + encodeURIComponent("Hola SneakerHype HMO! " + (clientName ? "Soy " + clientName + ". " : "") + "Quiero apartar el modelo *" + modalItem.name + "* (" + modalItem.code + " • Calidad G5 Full Set) en talla *" + getSize(modalItem.id) + "* para entrega en *" + city.name + "* (" + city.deliverySpot + "). Apartado hoy: $1,500 MXN | Restante al recibir: $1,200 MXN.")}
+                  href={"https://wa.me/" + city.whatsapp + "?text=" + encodeURIComponent("Hola " + city.partnerName + " de SneakerHype " + city.name + "! " + (clientName ? "Soy " + clientName + ". " : "") + "Quiero apartar el modelo *" + modalItem.name + "* (" + modalItem.code + " • Full Set) en talla *" + getSize(modalItem.id) + "* para entrega en *" + city.name + "* (" + city.deliverySpot + "). Apartado hoy: $1,500 MXN | Restante al recibir: $1,200 MXN.")}
                   target="_blank"
                   className="block w-full text-center py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm shadow-lg shadow-emerald-900/30"
                 >
-                  Enviar Apartado por WhatsApp a {city.name} ({city.phoneDisplay})
+                  Enviar Apartado por WhatsApp con {city.partnerName} ({city.name} • {city.phoneDisplay})
                 </a>
               </div>
             </div>
